@@ -25,16 +25,16 @@ token = response.json()["access_token"]
 
 print("Access Token:", token)
 
-api_url = "https://api.domain.com.au/sandbox/v1/agencies/22473/listings?listingStatusFilter=live&pageNumber=1&pageSize=3"
-
+api_url = "https://api.domain.com.au/sandbox/v1/agencies/22473/listings?listingStatusFilter=live&pageNumber=1&pageSize=20"
 
 headers = {
     "Authorization": f"Bearer {token}",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "X-Api-Call-Source": "live-api-browser"
 }
 
 
 
-response = requests.post(api_url, headers=headers)
+response = requests.get(api_url, headers=headers)
 
 print(response.json())
