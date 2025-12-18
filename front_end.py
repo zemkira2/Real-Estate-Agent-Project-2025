@@ -32,63 +32,54 @@ suburb = st.sidebar.multiselect("Preferred Suburbs", options=sorted(df["suburb"]
 bedrooms = st.sidebar.slider("Minimum Bedrooms", 1, 6, 2)
 
 # === Filtering ===
-filtered = df[
-    (df["price"] >= budget[0]) & (df["price"] <= budget[1]) &
-    (df["bedrooms"] >= bedrooms)
-]
+# filtered = df[
+#     (df["price"] >= budget[0]) & (df["price"] <= budget[1]) &
+#     (df["bedrooms"] >= bedrooms)
+# ]
 
-if property_type != "Any":
-    filtered = filtered[filtered["property_type"] == property_type]
+# if property_type != "Any":
+#     filtered = filtered[filtered["property_type"] == property_type]
 
-if suburb:
-    filtered = filtered[filtered["suburb"].isin(suburb)]
+# if suburb:
+#     filtered = filtered[filtered["suburb"].isin(suburb)]
 
-st.subheader("🏘️ Filtered Properties")
-st.write(f"Showing {len(filtered)} properties after filtering.")
-st.dataframe(filtered.head(10))
+# st.subheader("🏘️ Filtered Properties")
+# st.write(f"Showing {len(filtered)} properties after filtering.")
+# st.dataframe(filtered.head(10))
 
-# === Evaluation Functions ===
-def rental_yield(row):
-    return (row["rent_estimate"] * 52) / row["price"]
+# # === Evaluation Functions ===
+# def rental_yield(row):
+#     return (row["rent_estimate"] * 52) / row["price"]
 
-def growth_score(row):
-    score = 0
-    if row["land_size"] > 600:
-        score += 5
-    if row["suburb"] in ["HighGrowthville", "FastBoomTown"]:
-        score += 5
-    elif row["suburb"] in ["RegionalTown"]:
-        score += 3
-    return score
 
-def risk_score(row):
-    score = 0
-    if row["suburb"] in ["FloodZone"]:
-        score += 5
-    if row["suburb"] in ["IndustrialArea"]:
-        score += 2
-    return score
+# def risk_score(row):
+#     score = 0
+#     if row["suburb"] in ["FloodZone"]:
+#         score += 5
+#     if row["suburb"] in ["IndustrialArea"]:
+#         score += 2
+#     return score
 
-def evaluate(df):
-    df = df.copy()
-    df["yield"] = df.apply(rental_yield, axis=1)
-    df["yield_score"] = np.interp(df["yield"], [0, 0.1], [0, 10])
-    df["growth_score"] = df.apply(growth_score, axis=1)
-    df["risk_score"] = df.apply(risk_score, axis=1)
-    df["final_score"] = 0.4 * df["yield_score"] + 0.4 * df["growth_score"] - 0.2 * df["risk_score"]
-    return df.sort_values("final_score", ascending=False)
+# def evaluate(df):
+#     df = df.copy()
+#     df["yield"] = df.apply(rental_yield, axis=1)
+#     df["yield_score"] = np.interp(df["yield"], [0, 0.1], [0, 10])
+#     df["growth_score"] = df.apply(growth_score, axis=1)
+#     df["risk_score"] = df.apply(risk_score, axis=1)
+#     df["final_score"] = 0.4 * df["yield_score"] + 0.4 * df["growth_score"] - 0.2 * df["risk_score"]
+#     return df.sort_values("final_score", ascending=False)
 
-# === Ranking ===
-if st.button("🚀 Recommend Properties"):
-    if filtered.empty:
-        st.warning("No properties match your filters.")
-    else:
-        ranked = evaluate(filtered)
-        top_n = ranked.head(5).reset_index(drop=True)
-        st.success("Here are your top recommendations:")
-        st.dataframe(top_n)
+# # === Ranking ===
+# if st.button("🚀 Recommend Properties"):
+#     if filtered.empty:
+#         st.warning("No properties match your filters.")
+#     else:
+#         ranked = evaluate(filtered)
+#         top_n = ranked.head(5).reset_index(drop=True)
+#         st.success("Here are your top recommendations:")
+#         st.dataframe(top_n)
 
-        # Placeholder for LLM reasoning
-        st.subheader("🧠 AI Explanation (Coming Soon)")
-        st.info("This section will explain *why* each property is recommended using an LLM.")
+#         # Placeholder for LLM reasoning
+#         st.subheader("🧠 AI Explanation (Coming Soon)")
+#         st.info("This section will explain *why* each property is recommended using an LLM.")
 
