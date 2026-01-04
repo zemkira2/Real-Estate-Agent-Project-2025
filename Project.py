@@ -10,6 +10,7 @@ from config import (
     flood_prone_suburbs,
     bushfire_risk_suburbs,
     industrial_zones,
+    SYSTEM_PROMPT,
 )
 
 load_dotenv()
@@ -35,7 +36,7 @@ def get_Access_token(CLIENT_ID, CLIENT_SECRET):
     response = requests.post(url, headers=headers, data=data)
     token = response.json()["access_token"]
 
-    print("Access Token:", token)
+    # print("Access Token:", token)
     return token
 
 
@@ -97,7 +98,7 @@ def capital_growth_score(row):
 
 
 df["growth_score"] = df.apply(capital_growth_score, axis=1)
-print(df.head())
+# print(df.head())
 
 
 def risk_score(row):
@@ -130,9 +131,36 @@ def rank_properties(df, top_n=5):
 
 
 top_properties = rank_properties(df, top_n=5)
-print(top_properties[["address", "suburb", "final_score"]])
+# print(top_properties[["address", "suburb", "final_score"]])
 
 
+def prepare_llm_input(top_properties_df, user_profile):
+    properties = []
+
+    for _, row in top_properties_df.iterrows():
+        properties.append(
+            {
+                "address": row["address"],
+                "suburb": row["suburb"],
+                "price": row["price"],
+                "property_type": row["property_type"],
+                "bedrooms": row["bedrooms"],
+                "rent_estimate": row["rent_estimate"],
+                "land_size": row["land_size"],
+                "yield_score": round(row["yield_score"], 2),
+                "growth_score": row["growth_score"],
+                "risk_score": row["risk_score"],
+                "final_score": round(row["final_score"], 3),
+            }
+        )
+
+    return {"user_profile": user_profile, "recommended_properties": properties}
+
+
+user_profile = {
+    "budget_range": [400000, 1000000],
+    "preferred_suburbs": [],
+}
 # api_url = "https://api.domain.com.au/sandbox/v1/agencies/22473/listings?listingStatusFilter=live&pageNumber=1&pageSize=20"
 
 # headers = {
@@ -143,3 +171,36 @@ print(top_properties[["address", "suburb", "final_score"]])
 # response = requests.get(api_url, headers=headers)
 # if response != None:
 #     print(response.json())
+
+
+from google import genai
+import json
+
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
+
+def generate_gemini_investment_reasoning(llm_input, client):
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=[
+            {
+                "role": "user",
+                "parts": [
+                    {"text": SYSTEM_PROMPT},
+                    {
+                        "text": "User profile:\n"
+                        + json.dumps(llm_input["user_profile"], indent=2)
+                    },
+                    {
+                        "text": "Recommended properties:\n"
+                        + json.dumps(llm_input["recommended_properties"], indent=2)
+                    },
+                ],
+            }
+        ],
+    )
+    print(response.text)
+
+
+llm_input = prepare_llm_input(top_properties, user_profile)
+generate_gemini_investment_reasoning(llm_input, client)
