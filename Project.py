@@ -1,10 +1,13 @@
 import requests
 import base64
 import pandas as pd
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
-CLIENT_ID = "client_e7e599072676e2b18682fa02c5687ab6"
-CLIENT_SECRET = "secret_f06619135c23fdeac64817150c72eec0"
+CLIENT_ID = os.getenv("CLIENT_ID")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")
 
 
 # Encode credentials for Authorization header
@@ -28,7 +31,7 @@ def get_Access_token(CLIENT_ID, CLIENT_SECRET):
     return token
 
 
-# Access_Token = get_Access_token(CLIENT_ID,CLIENT_SECRET)
+Access_Token = get_Access_token(CLIENT_ID, CLIENT_SECRET)
 
 
 def get_properties_from_mock_api(Access_Token):
@@ -39,7 +42,7 @@ def get_properties_from_mock_api(Access_Token):
         print("Access Token is empty")
 
 
-df = get_properties_from_mock_api("haha123")
+df = get_properties_from_mock_api(Access_Token)
 # print(df.head())
 
 
