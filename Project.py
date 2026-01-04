@@ -3,6 +3,14 @@ import base64
 import pandas as pd
 from dotenv import load_dotenv
 import os
+from pathlib import Path
+from config import (
+    city_suburbs,
+    regional_suburbs,
+    flood_prone_suburbs,
+    bushfire_risk_suburbs,
+    industrial_zones,
+)
 
 load_dotenv()
 
@@ -36,7 +44,9 @@ Access_Token = get_Access_token(CLIENT_ID, CLIENT_SECRET)
 
 def get_properties_from_mock_api(Access_Token):
     if Access_Token != None:
-        df = pd.read_csv("vic_properties_1000.csv")
+        project_root = Path(__file__).resolve().parent
+        csv_path = project_root / "vic_properties_1000.csv"
+        df = pd.read_csv(csv_path)
         return df
     else:
         print("Access Token is empty")
@@ -68,37 +78,6 @@ def rental_yield_score(data):
 # print(rental_yield_score(df.iloc[0]))
 df["yield_score"] = df.apply(rental_yield_score, axis=1)
 
-city_suburbs = [
-    "Richmond",
-    "Fitzroy",
-    "St Kilda",
-    "Carlton",
-    "Brunswick",
-    "Frankston",
-    "Werribee",
-    "Dandenong",
-    "Sunshine",
-    "Box Hill",
-    "Essendon",
-    "Preston",
-    "Reservoir",
-    "South Yarra",
-    "Toorak",
-    "Hawthorn",
-    "Footscray",
-]
-
-regional_suburbs = [
-    "Geelong",
-    "Ballarat",
-    "Bendigo",
-    "Shepparton",
-    "Mildura",
-    "Warrnambool",
-    "Traralgon",
-    "Echuca",
-]
-
 
 def capital_growth_score(row):
     score = 0
@@ -122,15 +101,6 @@ print(df.head())
 
 
 def risk_score(row):
-    # Rule 1: Flood-prone suburbs
-    flood_prone_suburbs = ["Shepparton", "Warrnambool", "Traralgon"]
-
-    # Rule 2: Bushfire-prone suburbs
-    bushfire_risk_suburbs = ["Mildura", "Echuca", "Shepparton", "Ballarat", "Bendigo"]
-
-    # Rule 3: Industrial zones or close to them
-    industrial_zones = ["Sunshine", "Dandenong", "Werribee", "Footscray"]
-
     score = 0
     if row["suburb"] in flood_prone_suburbs:
         score += 5
