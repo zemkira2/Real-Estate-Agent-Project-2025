@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import random
+from pathlib import Path
 
 random.seed(42)
 np.random.seed(42)
@@ -95,5 +96,5 @@ for _ in range(n):
     )
 
 df = pd.DataFrame(data)
-file_path = "D:\HomeWork\Summer Project 2025\Real-Estate-Agent-Project-2025/vic_properties_1000.csv"
-df.to_csv(file_path, index=False)
+output_path = Path(__file__).resolve().parent / "vic_properties_1000.csv"
+df.to_csv(output_path, index=False)
