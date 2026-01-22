@@ -36,10 +36,18 @@ If you omit these values, the project still runs in **mock/CSV mode** and output
    pip install -r requirements.txt
    ```
 
-3. Run the project:
+3. Run the CLI script:
 
    ```bash
    python Project.py
    ```
 
 The script prints top property recommendations from `vic_properties_1000.csv`. If `GEMINI_API_KEY` is set, it will also generate Gemini reasoning output.
+
+## Streamlit UI
+
+To launch the Streamlit interface (after installing dependencies):
+
+```bash
+python -m streamlit run front_end.py
+```

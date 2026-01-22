@@ -3,6 +3,8 @@ import base64
 import pandas as pd
 from dotenv import load_dotenv
 import os
+from google import genai
+import json
 from pathlib import Path
 from config import (
     city_suburbs,
@@ -14,9 +16,9 @@ from config import (
 )
 
 load_dotenv()
-
 CLIENT_ID = os.getenv("CLIENT_ID")
 CLIENT_SECRET = os.getenv("CLIENT_SECRET")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 
 # Encode credentials for Authorization header
@@ -53,10 +55,6 @@ def get_properties_from_mock_api(Access_Token):
         print("Access Token is empty")
 
 
-df = get_properties_from_mock_api(Access_Token)
-# print(df.head())
-
-
 def filter_properties(df, budget, property_type, suburbs, min_bedrooms):
     filtered = df[
         (df["price"] >= budget[0])
@@ -73,11 +71,6 @@ def filter_properties(df, budget, property_type, suburbs, min_bedrooms):
 def rental_yield_score(data):
     yield_value = (data["rent_estimate"] * 52) / data["price"]
     return min(10, max(0, yield_value * 100))
-
-
-# print(filter_properties(df,[400000,1000000],"House",[],0))
-# print(rental_yield_score(df.iloc[0]))
-df["yield_score"] = df.apply(rental_yield_score, axis=1)
 
 
 def capital_growth_score(row):
@@ -97,10 +90,6 @@ def capital_growth_score(row):
     return min(score, 10)
 
 
-df["growth_score"] = df.apply(capital_growth_score, axis=1)
-# print(df.head())
-
-
 def risk_score(row):
     score = 0
     if row["suburb"] in flood_prone_suburbs:
@@ -113,7 +102,17 @@ def risk_score(row):
     return score
 
 
-df["risk_score"] = df.apply(risk_score, axis=1)
+def add_scores(df):
+    df = df.copy()
+
+    # Compute final score
+    df["yield_score"] = df.apply(rental_yield_score, axis=1)
+    df["growth_score"] = df.apply(capital_growth_score, axis=1)
+    df["risk_score"] = df.apply(risk_score, axis=1)
+    df["final_score"] = (
+        0.4 * df["growth_score"] + 0.4 * df["yield_score"] - 0.2 * df["risk_score"]
+    )
+    return df
 
 
 def rank_properties(df, top_n=5):
@@ -128,10 +127,6 @@ def rank_properties(df, top_n=5):
     top_properties = df.sort_values("final_score", ascending=False).head(top_n)
 
     return top_properties
-
-
-top_properties = rank_properties(df, top_n=5)
-# print(top_properties[["address", "suburb", "final_score"]])
 
 
 def prepare_llm_input(top_properties_df, user_profile):
@@ -157,10 +152,10 @@ def prepare_llm_input(top_properties_df, user_profile):
     return {"user_profile": user_profile, "recommended_properties": properties}
 
 
-user_profile = {
-    "budget_range": [400000, 1000000],
-    "preferred_suburbs": [],
-}
+# user_profile = {
+#     "budget_range": [400000, 1000000],
+#     "preferred_suburbs": [],
+# }
 # api_url = "https://api.domain.com.au/sandbox/v1/agencies/22473/listings?listingStatusFilter=live&pageNumber=1&pageSize=20"
 
 # headers = {
@@ -173,10 +168,10 @@ user_profile = {
 #     print(response.json())
 
 
-from google import genai
-import json
-
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+def get_gemini_client():
+    if not GEMINI_API_KEY:
+        return None
+    return genai.Client(api_key=GEMINI_API_KEY)
 
 
 def generate_gemini_investment_reasoning(llm_input, client):
@@ -199,8 +194,35 @@ def generate_gemini_investment_reasoning(llm_input, client):
             }
         ],
     )
-    print(response.text)
+    return response.text
 
 
-llm_input = prepare_llm_input(top_properties, user_profile)
-generate_gemini_investment_reasoning(llm_input, client)
+def main():
+    Access_Token = get_Access_token(CLIENT_ID, CLIENT_SECRET)
+    df = get_properties_from_mock_api(Access_Token)
+    df = add_scores(df)
+
+    user_profile = {
+        "budget_range": [400000, 1000000],
+        "preferred_suburbs": [],
+    }
+
+    filtered = filter_properties(
+        df,
+        budget=user_profile["budget_range"],
+        property_type="Any",
+        suburbs=user_profile["preferred_suburbs"],
+        min_bedrooms=0,
+    )
+    top_properties = rank_properties(filtered, top_n=5)
+    print(top_properties[["address", "suburb", "final_score"]])
+
+    llm_input = prepare_llm_input(top_properties, user_profile)
+    client = get_gemini_client()
+    # reasoning = generate_gemini_investment_reasoning(llm_input, client)
+    # if reasoning:
+    #     print(reasoning)
+
+
+if __name__ == "__main__":
+    main()
