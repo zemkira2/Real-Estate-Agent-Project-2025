@@ -42,17 +42,23 @@ def get_Access_token(CLIENT_ID, CLIENT_SECRET):
     return token
 
 
-Access_Token = get_Access_token(CLIENT_ID, CLIENT_SECRET)
-
-
 def get_properties_from_mock_api(Access_Token):
+    project_root = Path(__file__).resolve().parent
+    csv_path = project_root / "vic_properties_1000.csv"
     if Access_Token != None:
-        project_root = Path(__file__).resolve().parent
-        csv_path = project_root / "vic_properties_1000.csv"
-        df = pd.read_csv(csv_path)
-        return df
-    else:
-        print("Access Token is empty")
+        api_url = "https://api.domain.com.au/sandbox/v1/agencies/22473/listings?listingStatusFilter=live&pageNumber=1&pageSize=20"
+        headers = {
+            "Authorization": f"Bearer {Access_Token}",
+            "Content-Type": "application/json",
+            "X-Api-Call-Source": "live-api-browser",
+        }
+    response = requests.get(api_url, headers=headers)
+    # if response != None:
+    #     # print(response.json())
+    #     return pd.DataFrame(response.json())
+    # else:
+    #     return pd.read_csv(csv_path)
+    return pd.read_csv(csv_path)
 
 
 def filter_properties(df, budget, property_type, suburbs, min_bedrooms):
@@ -150,22 +156,6 @@ def prepare_llm_input(top_properties_df, user_profile):
         )
 
     return {"user_profile": user_profile, "recommended_properties": properties}
-
-
-# user_profile = {
-#     "budget_range": [400000, 1000000],
-#     "preferred_suburbs": [],
-# }
-# api_url = "https://api.domain.com.au/sandbox/v1/agencies/22473/listings?listingStatusFilter=live&pageNumber=1&pageSize=20"
-
-# headers = {
-#     "Authorization": f"Bearer {get_Access_token(CLIENT_ID,CLIENT_SECRET)}",
-#     "Content-Type": "application/json",
-#     "X-Api-Call-Source": "live-api-browser"
-# }
-# response = requests.get(api_url, headers=headers)
-# if response != None:
-#     print(response.json())
 
 
 def get_gemini_client():

@@ -1,5 +1,8 @@
 import streamlit as st
-
+from dotenv import load_dotenv
+import os
+import base64
+import requests
 from Project import (
     add_scores,
     filter_properties,
@@ -8,8 +11,12 @@ from Project import (
     get_properties_from_mock_api,
     prepare_llm_input,
     rank_properties,
-    Access_Token,
+    get_Access_token,
 )
+
+load_dotenv()
+CLIENT_ID = os.getenv("CLIENT_ID")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")
 
 st.set_page_config(page_title="Real Estate Agent", layout="wide")
 
@@ -19,7 +26,7 @@ st.write(
     "Gemini reasoning appears when `GEMINI_API_KEY` is configured."
 )
 
-df = get_properties_from_mock_api(Access_Token)
+df = get_properties_from_mock_api(get_Access_token(CLIENT_ID, CLIENT_SECRET))
 df = add_scores(df)
 
 st.sidebar.header("Search Criteria")
