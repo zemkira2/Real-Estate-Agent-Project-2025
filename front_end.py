@@ -26,7 +26,12 @@ st.write(
     "Gemini reasoning appears when `GEMINI_API_KEY` is configured."
 )
 
-df = get_properties_from_mock_api(get_Access_token(CLIENT_ID, CLIENT_SECRET))
+if CLIENT_ID and CLIENT_SECRET:
+    token = get_Access_token(CLIENT_ID, CLIENT_SECRET)
+else:
+    token = None
+
+df = get_properties_from_mock_api(token)
 df = add_scores(df)
 
 st.sidebar.header("Search Criteria")
@@ -81,12 +86,16 @@ user_profile = {
 
 llm_input = prepare_llm_input(top_properties, user_profile)
 client = get_gemini_client()
-# reasoning = generate_gemini_investment_reasoning(llm_input, client)
 
 st.subheader("LLM Reasoning")
-if st.button("Generate LLM reasoning"):
-    with st.spinner(
-        "Generating...",
-    ):
-        reasoning = generate_gemini_investment_reasoning(llm_input, client)
-        st.write(reasoning)
+
+if client is None:
+    st.warning(
+        "Gemini reasoning is unavailable because no GEMINI_API_KEY is configured. "
+    )
+    st.button("Generate LLM reasoning", disabled=True)
+else:
+    if st.button("Generate LLM reasoning"):
+        with st.spinner("Generating..."):
+            reasoning = generate_gemini_investment_reasoning(llm_input, client)
+            st.write(reasoning)

@@ -43,22 +43,26 @@ def get_Access_token(CLIENT_ID, CLIENT_SECRET):
 
 
 def get_properties_from_mock_api(Access_Token):
+
     project_root = Path(__file__).resolve().parent
     csv_path = project_root / "vic_properties_1000.csv"
-    if Access_Token != None:
-        api_url = "https://api.domain.com.au/sandbox/v1/agencies/22473/listings?listingStatusFilter=live&pageNumber=1&pageSize=20"
-        headers = {
-            "Authorization": f"Bearer {Access_Token}",
-            "Content-Type": "application/json",
-            "X-Api-Call-Source": "live-api-browser",
-        }
+
+    # MOCK MODE
+    if Access_Token is None:
+        return pd.read_csv(csv_path)
+
+    # LIVE MODE
+    api_url = "https://api.domain.com.au/sandbox/v1/agencies/22473/listings?listingStatusFilter=live&pageNumber=1&pageSize=20"
+
+    headers = {
+        "Authorization": f"Bearer {Access_Token}",
+        "Content-Type": "application/json",
+        "X-Api-Call-Source": "live-api-browser",
+    }
+
     response = requests.get(api_url, headers=headers)
-    # if response != None:
-    #     # print(response.json())
-    #     return pd.DataFrame(response.json())
-    # else:
-    #     return pd.read_csv(csv_path)
-    return pd.read_csv(csv_path)
+
+    return pd.DataFrame(response.json())
 
 
 def filter_properties(df, budget, property_type, suburbs, min_bedrooms):
@@ -158,6 +162,18 @@ def prepare_llm_input(top_properties_df, user_profile):
     return {"user_profile": user_profile, "recommended_properties": properties}
 
 
+def check_API_Keys():
+    if not CLIENT_ID or not CLIENT_SECRET:
+        print("Warning: CLIENT_ID and CLIENT_SECRET are not set. Running in MOCK mode.")
+    else:
+        print("CLIENT_ID and CLIENT_SECRET found. Running in LIVE API mode.")
+
+    if not GEMINI_API_KEY:
+        print("Warning: GEMINI_API_KEY is not set. Gemini reasoning will be disabled.")
+    else:
+        print("GEMINI_API_KEY found. Gemini reasoning will be enabled.")
+
+
 def get_gemini_client():
     if not GEMINI_API_KEY:
         return None
@@ -188,7 +204,7 @@ def generate_gemini_investment_reasoning(llm_input, client):
 
 
 def main():
-    Access_Token = get_Access_token(CLIENT_ID, CLIENT_SECRET)
+    Access_Token = check_API_Keys()
     df = get_properties_from_mock_api(Access_Token)
     df = add_scores(df)
 
@@ -204,11 +220,11 @@ def main():
         suburbs=user_profile["preferred_suburbs"],
         min_bedrooms=0,
     )
-    top_properties = rank_properties(filtered, top_n=5)
-    print(top_properties[["address", "suburb", "final_score"]])
 
-    llm_input = prepare_llm_input(top_properties, user_profile)
-    client = get_gemini_client()
+    top_properties = rank_properties(filtered, top_n=5)
+
+    print("\nTop Property Recommendations:\n")
+    print(top_properties[["address", "suburb", "final_score"]])
     # reasoning = generate_gemini_investment_reasoning(llm_input, client)
     # if reasoning:
     #     print(reasoning)
