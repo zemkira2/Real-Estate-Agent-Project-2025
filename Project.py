@@ -168,11 +168,6 @@ def check_API_Keys():
     else:
         print("CLIENT_ID and CLIENT_SECRET found. Running in LIVE API mode.")
 
-    if not GEMINI_API_KEY:
-        print("Warning: GEMINI_API_KEY is not set. Gemini reasoning will be disabled.")
-    else:
-        print("GEMINI_API_KEY found. Gemini reasoning will be enabled.")
-
 
 def get_gemini_client():
     if not GEMINI_API_KEY:
