@@ -1,38 +1,33 @@
 import streamlit as st
 from dotenv import load_dotenv
-import os
-import base64
-import requests
 from Project import (
     add_scores,
     filter_properties,
     generate_gemini_investment_reasoning,
     get_gemini_client,
-    get_properties_from_mock_api,
+    load_properties,
     prepare_llm_input,
     rank_properties,
-    get_Access_token,
 )
 
 load_dotenv()
-CLIENT_ID = os.getenv("CLIENT_ID")
-CLIENT_SECRET = os.getenv("CLIENT_SECRET")
 
 st.set_page_config(page_title="Real Estate Agent", layout="wide")
 
 st.title("Real Estate Agent")
+df, data_source, source_message = load_properties()
+df = add_scores(df)
+
 st.write(
-    "Browse mock property recommendations from the CSV. "
+    "Browse property recommendations from live Domain data when available, "
+    "with automatic CSV fallback when keys are missing or the live request fails. "
     "Gemini reasoning appears when `GEMINI_API_KEY` is configured."
 )
 
-if CLIENT_ID and CLIENT_SECRET:
-    token = get_Access_token(CLIENT_ID, CLIENT_SECRET)
+if data_source == "live":
+    st.success(source_message)
 else:
-    token = None
-
-df = get_properties_from_mock_api(token)
-df = add_scores(df)
+    st.info(source_message)
 
 st.sidebar.header("Search Criteria")
 
