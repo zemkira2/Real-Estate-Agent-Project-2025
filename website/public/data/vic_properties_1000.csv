@@ -1,0 +1,1001 @@
+price,rent_estimate,property_type,address,suburb,land_size,bedrooms
+744785,537,Unit,13 Main Rd,Shepparton,85,2
+491981,464,Unit,45 Bridge Rd,Traralgon,73,1
+831328,714,House,14 Glenferrie Rd,South Yarra,1009,4
+888289,717,House,4 Victoria Ave,Hawthorn,846,4
+938363,598,House,53 Smith St,Ballarat,885,3
+701127,447,House,236 High St,Frankston,925,5
+1278244,766,House,186 Lygon St,Werribee,243,4
+890036,810,House,41 Victoria Ave,Echuca,928,4
+777955,629,Unit,84 Smith St,Shepparton,221,3
+744359,632,House,37 Lygon St,Mildura,651,3
+825454,483,House,286 Victoria Ave,Box Hill,264,4
+766393,728,Unit,206 Smith St,Fitzroy,283,2
+504905,453,Unit,256 King St,Dandenong,214,4
+639400,421,Unit,127 Queen St,Frankston,159,4
+470132,304,Unit,71 King St,Sunshine,62,2
+1136976,736,House,217 Queen St,Shepparton,1108,3
+583878,405,Unit,59 High St,Toorak,137,4
+1138682,887,House,233 Queen St,Essendon,689,5
+534286,397,Unit,55 Bridge Rd,Geelong,179,4
+603422,416,House,83 Smith St,Brunswick,1150,3
+636034,517,House,123 Victoria Ave,Sunshine,311,2
+1138970,718,House,273 Main Rd,Reservoir,1123,2
+938078,647,House,217 Bridge Rd,Frankston,561,5
+559973,402,Unit,192 Lygon St,Mildura,165,4
+1189444,895,House,174 Main Rd,Bendigo,621,3
+890759,783,House,31 Main Rd,Richmond,214,2
+692100,452,Unit,143 King St,South Yarra,83,2
+615994,477,Unit,243 King St,Reservoir,74,2
+768784,619,Unit,211 Chapel St,Sunshine,63,4
+530448,316,Unit,207 High St,Carlton,77,4
+1059500,859,House,230 Bridge Rd,Ballarat,720,3
+641393,412,House,282 Station St,St Kilda,180,2
+440741,265,Unit,209 Queen St,Bendigo,271,3
+559552,527,Unit,2 Chapel St,Geelong,250,3
+613224,582,House,250 Bridge Rd,Essendon,595,2
+653638,580,Unit,32 Bridge Rd,Traralgon,199,2
+1209739,840,House,30 Queen St,South Yarra,290,4
+1220120,750,House,207 King St,Mildura,654,5
+595868,501,Unit,42 Glenferrie Rd,Fitzroy,194,4
+1245216,929,House,161 King St,Frankston,418,3
+643899,402,House,38 Smith St,Preston,354,3
+861950,661,House,136 Bridge Rd,Ballarat,290,5
+687317,406,Unit,225 Queen St,Werribee,256,3
+588656,545,Unit,284 Lygon St,Richmond,76,5
+931156,630,House,284 Main Rd,Carlton,581,3
+458390,381,Unit,136 Lygon St,Mildura,282,3
+1196401,834,House,142 Chapel St,Shepparton,417,1
+772293,600,Unit,283 Station St,Geelong,78,3
+476818,375,Unit,19 Bridge Rd,Brunswick,87,3
+853250,553,House,187 Victoria Ave,Fitzroy,580,4
+574118,545,Unit,287 Smith St,Carlton,241,5
+988312,865,House,212 Queen St,Geelong,830,2
+988544,928,House,137 King St,Mildura,371,4
+526876,485,Unit,103 King St,Reservoir,260,3
+815445,658,Unit,99 Lygon St,Richmond,271,3
+603617,562,Unit,261 Smith St,Frankston,265,4
+613975,375,House,134 Main Rd,Richmond,693,3
+611953,399,Unit,177 Chapel St,Footscray,180,3
+1128235,671,House,131 King St,Hawthorn,153,4
+583119,409,Unit,101 Lygon St,Toorak,292,3
+581013,422,Unit,64 Smith St,Footscray,220,3
+741000,505,House,284 Victoria Ave,Box Hill,926,2
+1022370,916,House,208 Victoria Ave,Hawthorn,580,3
+678002,484,Unit,165 Glenferrie Rd,Hawthorn,222,3
+585735,401,Unit,44 Queen St,Reservoir,212,3
+614631,483,House,159 King St,St Kilda,451,4
+511940,323,Unit,38 Station St,Bendigo,211,3
+783721,694,Unit,254 Chapel St,Warrnambool,217,2
+614677,372,House,218 Main Rd,Echuca,1101,2
+1060051,1014,House,234 Main Rd,Bendigo,799,4
+665966,582,Unit,219 Bridge Rd,Traralgon,240,4
+450623,294,Unit,142 King St,Frankston,120,3
+452245,262,Unit,121 Victoria Ave,Warrnambool,278,3
+463674,413,Unit,119 Queen St,Brunswick,230,4
+614198,521,Unit,170 Chapel St,Essendon,102,3
+566559,486,Unit,11 Glenferrie Rd,Echuca,291,3
+1031167,901,House,215 Chapel St,Echuca,708,3
+496913,301,Unit,173 Chapel St,Richmond,265,4
+454012,325,Unit,14 Bridge Rd,Footscray,219,3
+561627,349,Unit,70 Chapel St,Shepparton,116,2
+824269,749,Unit,168 Station St,Ballarat,147,4
+553480,452,Unit,42 Victoria Ave,Essendon,188,1
+802164,565,House,36 Lygon St,Bendigo,656,4
+1139044,685,House,79 Glenferrie Rd,Richmond,384,2
+739400,515,House,189 Victoria Ave,Preston,384,3
+617961,434,Unit,14 Glenferrie Rd,Carlton,282,3
+1184917,1016,House,39 King St,Warrnambool,767,2
+446153,367,Unit,22 Glenferrie Rd,Carlton,219,3
+713725,655,House,175 Lygon St,South Yarra,1153,4
+1219890,925,House,236 Lygon St,Sunshine,703,3
+598980,373,Unit,239 Station St,Toorak,201,4
+709989,604,Unit,143 Main Rd,Bendigo,168,2
+766972,667,House,173 Chapel St,Mildura,815,3
+701394,556,Unit,133 Smith St,Ballarat,202,3
+1071951,936,House,98 Bridge Rd,Richmond,982,2
+564264,433,Unit,244 King St,Echuca,54,3
+720179,560,Unit,125 Chapel St,Bendigo,144,4
+570758,423,Unit,218 Smith St,South Yarra,166,3
+771425,453,House,62 King St,Frankston,529,3
+605318,374,Unit,142 Station St,Traralgon,263,5
+513818,303,Unit,92 Smith St,Bendigo,186,1
+824679,678,Unit,284 High St,Fitzroy,82,4
+506659,354,Unit,7 Main Rd,Reservoir,162,3
+1115033,861,House,245 Victoria Ave,Fitzroy,970,4
+644758,597,House,28 Lygon St,Hawthorn,772,2
+1070978,721,House,214 Bridge Rd,Carlton,929,4
+798019,586,Unit,220 Glenferrie Rd,Werribee,65,3
+521128,452,Unit,109 King St,Carlton,90,4
+887647,590,House,81 Main Rd,Toorak,1112,3
+803048,487,Unit,145 Victoria Ave,Bendigo,109,2
+468113,322,Unit,102 Glenferrie Rd,Shepparton,107,2
+1179528,754,House,37 Queen St,Frankston,779,2
+997500,932,House,225 Victoria Ave,Hawthorn,772,3
+775107,688,Unit,253 Bridge Rd,South Yarra,60,2
+826442,678,House,129 Glenferrie Rd,Dandenong,192,2
+678529,619,Unit,241 Queen St,Fitzroy,96,5
+761342,675,Unit,47 Station St,Shepparton,135,3
+639952,415,Unit,169 Queen St,Carlton,123,4
+450776,415,Unit,19 Bridge Rd,Echuca,114,2
+1035241,812,House,264 Chapel St,Echuca,1096,4
+516723,459,Unit,186 Bridge Rd,Ballarat,244,3
+473662,437,Unit,68 Bridge Rd,Frankston,228,3
+1142637,799,House,123 Lygon St,Richmond,178,3
+711292,440,Unit,59 King St,St Kilda,215,5
+537785,357,Unit,261 Victoria Ave,Warrnambool,173,3
+781272,579,Unit,75 Bridge Rd,Preston,203,2
+550075,490,Unit,142 Main Rd,Brunswick,251,3
+683934,621,Unit,153 Victoria Ave,Richmond,164,4
+775690,450,Unit,283 Smith St,Sunshine,132,3
+645587,499,House,197 Glenferrie Rd,Bendigo,991,4
+529746,391,Unit,196 Station St,Traralgon,252,5
+482277,319,Unit,65 High St,Reservoir,273,4
+647783,404,House,8 Station St,South Yarra,466,3
+930603,658,House,204 Smith St,Frankston,928,4
+1234420,1160,House,278 Station St,Warrnambool,630,3
+819041,574,Unit,47 King St,Werribee,244,5
+867408,674,Unit,86 Station St,Carlton,61,5
+626033,530,Unit,184 Victoria Ave,Fitzroy,112,3
+1208473,866,House,93 Lygon St,Hawthorn,933,2
+1035294,984,House,299 Station St,Bendigo,670,2
+661593,627,Unit,239 High St,Mildura,90,4
+534447,360,Unit,154 Glenferrie Rd,Sunshine,166,4
+1180433,907,House,55 Station St,Box Hill,885,3
+727931,504,Unit,12 Victoria Ave,Warrnambool,194,3
+807062,554,House,147 Station St,Traralgon,871,3
+888539,525,House,129 Glenferrie Rd,Ballarat,230,3
+601294,488,Unit,297 High St,Preston,73,4
+1114619,859,House,90 Chapel St,Traralgon,899,2
+871649,520,Unit,132 Queen St,Frankston,125,5
+1008956,690,House,39 Station St,Carlton,612,4
+608438,564,Unit,47 Smith St,Toorak,187,1
+486804,326,Unit,135 Lygon St,Sunshine,290,4
+1216137,769,House,242 King St,Mildura,821,3
+433774,332,Unit,238 Main Rd,Shepparton,79,3
+956064,914,House,253 Victoria Ave,Fitzroy,427,2
+627518,420,Unit,277 Lygon St,Sunshine,236,3
+811905,678,Unit,251 Main Rd,Shepparton,121,5
+502090,437,Unit,228 King St,Sunshine,268,5
+454046,303,Unit,279 Smith St,Mildura,120,2
+812060,696,House,109 Main Rd,Preston,833,2
+917059,659,House,36 King St,Hawthorn,627,3
+713228,585,Unit,2 Glenferrie Rd,Brunswick,87,4
+807149,662,House,57 Queen St,Frankston,883,2
+665820,521,Unit,90 High St,Dandenong,239,2
+487175,298,Unit,244 Main Rd,Carlton,181,4
+1075632,966,House,114 Bridge Rd,Preston,767,4
+783503,549,Unit,246 High St,Richmond,77,3
+554187,359,Unit,42 Main Rd,Preston,66,3
+564611,335,Unit,300 Lygon St,Footscray,202,3
+1274196,1025,House,221 Bridge Rd,Preston,384,4
+587697,492,Unit,111 Bridge Rd,Echuca,108,3
+1273216,743,House,213 Chapel St,Preston,790,3
+644238,499,House,243 Queen St,Sunshine,324,2
+704668,468,House,67 Smith St,Carlton,825,3
+984507,812,House,217 Lygon St,Sunshine,789,5
+705655,454,House,109 Bridge Rd,Hawthorn,609,4
+853104,719,Unit,59 Smith St,Toorak,256,3
+604299,439,House,286 Glenferrie Rd,Toorak,697,3
+666915,625,Unit,174 Victoria Ave,Frankston,272,1
+680454,429,House,36 Chapel St,Mildura,212,4
+573387,406,Unit,193 King St,South Yarra,90,3
+754416,468,House,291 Smith St,Traralgon,468,4
+728282,679,Unit,42 High St,Footscray,158,3
+949599,868,House,140 Chapel St,Preston,383,4
+398721,270,Unit,250 Victoria Ave,Carlton,151,1
+896967,745,House,155 King St,Richmond,673,4
+758926,676,Unit,255 High St,Carlton,147,2
+618704,489,Unit,287 Bridge Rd,Bendigo,270,2
+781981,610,Unit,40 Station St,Richmond,196,3
+756522,507,House,149 Chapel St,Shepparton,815,3
+822455,504,House,186 Station St,Footscray,366,3
+931705,859,House,269 Chapel St,Hawthorn,785,3
+937286,865,House,40 Queen St,Dandenong,547,3
+760334,624,House,76 Lygon St,Traralgon,674,2
+1109710,785,House,39 Queen St,Footscray,1161,5
+509145,362,Unit,230 Glenferrie Rd,Hawthorn,210,4
+720074,616,Unit,241 Main Rd,Preston,253,3
+620934,572,House,260 Smith St,Fitzroy,1075,3
+986919,906,House,40 Victoria Ave,Sunshine,1188,3
+548691,481,Unit,22 Bridge Rd,Hawthorn,196,5
+729969,601,House,244 Glenferrie Rd,Dandenong,1072,5
+1001687,610,House,259 Main Rd,Dandenong,1046,1
+624312,399,Unit,82 Glenferrie Rd,South Yarra,122,3
+745666,688,Unit,27 Smith St,Echuca,74,2
+935593,758,House,130 Victoria Ave,Box Hill,439,3
+891080,517,House,201 Lygon St,Shepparton,323,3
+1264226,779,House,169 Lygon St,Box Hill,341,4
+794977,662,House,186 Bridge Rd,Essendon,519,3
+690253,400,House,99 Station St,Echuca,467,5
+1214618,776,House,277 Bridge Rd,Carlton,418,4
+1015596,800,House,93 Queen St,Brunswick,239,4
+552684,466,Unit,228 King St,Mildura,250,4
+805628,667,Unit,159 King St,Toorak,99,5
+649498,431,Unit,237 Station St,Hawthorn,178,4
+680739,579,Unit,71 King St,Geelong,173,2
+625572,418,Unit,64 Bridge Rd,Carlton,91,2
+1085121,762,House,224 Queen St,South Yarra,604,5
+452784,391,Unit,28 Chapel St,Richmond,110,3
+625788,517,Unit,15 King St,Sunshine,264,5
+847851,766,Unit,20 Queen St,Brunswick,170,5
+872115,724,House,230 Station St,Warrnambool,188,5
+547889,436,Unit,271 Bridge Rd,Brunswick,123,2
+442929,271,Unit,123 High St,Carlton,209,3
+723451,520,House,275 Station St,Carlton,645,3
+1267303,860,House,181 High St,Essendon,533,3
+1156060,775,House,185 Bridge Rd,St Kilda,1189,5
+844251,803,House,241 Chapel St,Richmond,914,3
+444349,324,Unit,35 Smith St,Richmond,218,2
+1210880,1114,House,171 Glenferrie Rd,Echuca,843,1
+443082,363,Unit,238 Lygon St,Echuca,257,3
+411970,364,Unit,19 Station St,Warrnambool,252,2
+582809,449,Unit,264 Victoria Ave,Dandenong,189,5
+753792,602,Unit,98 Lygon St,Fitzroy,249,3
+612713,470,Unit,64 Victoria Ave,Dandenong,152,3
+549838,359,Unit,255 Queen St,Dandenong,254,3
+695985,595,Unit,41 Chapel St,St Kilda,260,3
+896484,614,House,53 Smith St,Werribee,755,3
+732359,429,Unit,86 Chapel St,Footscray,60,3
+980579,809,House,30 Victoria Ave,Essendon,981,4
+597429,385,House,82 Lygon St,Traralgon,1047,2
+727243,683,Unit,188 King St,St Kilda,195,3
+710900,671,Unit,231 Lygon St,Brunswick,245,3
+469479,436,Unit,188 Bridge Rd,Brunswick,121,3
+856304,616,Unit,256 Queen St,Richmond,80,5
+494297,288,Unit,110 Station St,Frankston,175,4
+693275,647,House,232 Main Rd,Brunswick,1061,4
+889407,660,House,178 Smith St,Mildura,744,3
+825270,783,Unit,90 Lygon St,Geelong,81,3
+1068210,1012,House,253 King St,Brunswick,905,3
+1133831,1026,House,45 Queen St,Toorak,1130,3
+1229520,849,House,295 Chapel St,Echuca,799,2
+725436,526,Unit,265 Station St,Preston,262,2
+845888,765,Unit,67 Queen St,Hawthorn,272,3
+571415,399,Unit,79 Bridge Rd,Carlton,132,2
+533891,343,Unit,41 Victoria Ave,South Yarra,294,2
+1190456,942,House,156 Lygon St,Brunswick,495,3
+669328,627,House,173 Queen St,Brunswick,208,4
+1248193,1054,House,136 Glenferrie Rd,Shepparton,1003,4
+538386,429,Unit,280 Station St,Richmond,127,3
+620479,381,Unit,153 Chapel St,Mildura,65,2
+896646,729,House,238 Station St,Essendon,444,3
+921957,883,House,205 Smith St,Dandenong,367,4
+542154,342,Unit,137 Main Rd,Preston,74,2
+952881,740,House,215 Glenferrie Rd,Box Hill,477,5
+1105107,1010,House,98 Smith St,Traralgon,1106,3
+522797,451,Unit,47 High St,Reservoir,297,3
+881888,745,House,25 Smith St,Hawthorn,1113,3
+1020822,865,House,221 Main Rd,Richmond,899,4
+651923,466,House,27 Chapel St,Fitzroy,741,3
+492291,340,Unit,282 Station St,South Yarra,209,4
+621683,552,Unit,202 Main Rd,Brunswick,136,4
+481846,428,Unit,102 Queen St,Echuca,61,3
+463285,422,Unit,243 Smith St,Warrnambool,278,2
+1197805,1112,House,164 Glenferrie Rd,Dandenong,762,3
+857687,664,Unit,273 Bridge Rd,South Yarra,126,4
+1275427,982,House,170 Smith St,Richmond,780,5
+781454,691,House,136 Station St,Footscray,1133,4
+626024,518,House,195 Glenferrie Rd,Shepparton,646,4
+738927,626,House,98 Main Rd,Warrnambool,1007,3
+800029,706,Unit,211 King St,Warrnambool,238,4
+647564,595,Unit,107 Bridge Rd,Brunswick,172,5
+831345,588,Unit,236 Queen St,Dandenong,223,3
+1199616,865,House,248 Victoria Ave,Warrnambool,721,5
+935461,574,House,148 Victoria Ave,Bendigo,1151,4
+589069,471,Unit,141 Bridge Rd,Sunshine,223,2
+551594,326,Unit,75 Smith St,Box Hill,294,1
+532151,402,Unit,132 Lygon St,Preston,261,2
+827035,650,House,71 Victoria Ave,Toorak,640,3
+906257,623,House,116 Bridge Rd,Mildura,996,2
+1036133,833,House,71 Main Rd,Reservoir,473,5
+813033,479,Unit,103 Station St,Reservoir,215,3
+748088,442,House,294 Lygon St,St Kilda,226,3
+409643,366,Unit,204 High St,Geelong,241,2
+915104,655,House,291 Victoria Ave,Richmond,836,5
+675377,423,Unit,269 Bridge Rd,Shepparton,84,4
+524880,408,Unit,58 King St,Frankston,167,2
+522009,456,Unit,8 Queen St,Warrnambool,195,4
+760882,502,Unit,208 Lygon St,Footscray,72,3
+546726,446,Unit,72 Queen St,Carlton,113,3
+828998,505,Unit,229 King St,Box Hill,127,5
+674001,402,Unit,134 High St,Hawthorn,65,4
+622698,487,Unit,208 Queen St,Werribee,213,4
+1216783,955,House,113 King St,Footscray,1081,3
+1137373,935,House,242 Bridge Rd,Essendon,317,4
+775676,664,House,40 Smith St,South Yarra,1185,2
+786670,749,Unit,85 Queen St,Toorak,163,4
+659578,512,House,251 Glenferrie Rd,Ballarat,1062,4
+762724,535,Unit,213 Bridge Rd,Brunswick,193,3
+733201,647,Unit,203 High St,Werribee,240,4
+466185,318,Unit,217 High St,St Kilda,188,4
+772357,576,Unit,147 High St,Reservoir,84,2
+606946,368,Unit,192 Chapel St,Shepparton,284,3
+721635,423,House,277 Lygon St,St Kilda,862,4
+595762,564,House,271 Chapel St,Toorak,606,4
+539767,485,Unit,238 Victoria Ave,Richmond,260,3
+406891,344,Unit,80 Smith St,Preston,274,2
+1169915,859,House,9 Chapel St,Mildura,356,2
+1059745,682,House,25 Glenferrie Rd,Preston,973,4
+820376,523,House,29 King St,Toorak,742,3
+736141,496,Unit,164 Glenferrie Rd,Traralgon,274,2
+795462,627,Unit,212 King St,South Yarra,192,3
+721976,615,Unit,219 Lygon St,Geelong,138,1
+506405,421,Unit,164 Bridge Rd,Box Hill,126,3
+746663,511,House,243 Bridge Rd,Echuca,765,4
+520303,491,Unit,288 High St,Preston,192,5
+1037855,893,House,131 King St,Box Hill,311,3
+1192796,942,House,275 Main Rd,Sunshine,922,2
+894535,727,House,97 Main Rd,Fitzroy,831,3
+818977,605,Unit,61 King St,Ballarat,228,5
+709786,477,Unit,123 Chapel St,Ballarat,147,4
+654320,467,Unit,158 Smith St,Shepparton,275,3
+627876,545,House,164 Station St,Carlton,997,3
+787493,459,Unit,9 Queen St,Bendigo,199,3
+1176007,731,House,79 Victoria Ave,Essendon,927,3
+789352,469,Unit,282 Station St,Bendigo,260,3
+774907,459,House,236 Station St,Shepparton,871,4
+1154795,1046,House,251 Bridge Rd,Traralgon,270,5
+643729,546,House,25 Lygon St,St Kilda,623,3
+759571,577,Unit,112 High St,Brunswick,208,3
+552266,339,House,250 Station St,Footscray,992,1
+792664,607,Unit,275 Victoria Ave,South Yarra,258,1
+924978,702,House,50 Main Rd,Geelong,666,2
+567273,365,Unit,192 Main Rd,Box Hill,112,3
+1157989,861,House,17 Main Rd,Mildura,922,3
+1236994,903,House,5 Lygon St,Fitzroy,1038,2
+846723,689,House,49 Glenferrie Rd,Dandenong,1123,2
+572298,470,House,144 Lygon St,St Kilda,794,2
+1167063,694,House,204 Queen St,Hawthorn,642,3
+824448,594,Unit,277 Lygon St,Box Hill,239,3
+829707,678,Unit,257 Main Rd,Warrnambool,161,2
+627217,483,Unit,204 Smith St,St Kilda,119,1
+756382,686,Unit,284 Smith St,Bendigo,224,3
+867349,720,House,152 Main Rd,Box Hill,318,4
+412723,264,Unit,79 Lygon St,Box Hill,77,3
+615957,372,Unit,185 Station St,Werribee,72,2
+680570,561,Unit,285 Bridge Rd,Preston,72,2
+778509,457,Unit,167 Glenferrie Rd,St Kilda,155,1
+735524,590,House,125 Bridge Rd,St Kilda,497,4
+850166,798,House,253 Victoria Ave,Werribee,1040,2
+669943,535,Unit,40 Station St,Werribee,113,3
+597456,434,Unit,101 Glenferrie Rd,Footscray,127,2
+721633,595,Unit,195 Glenferrie Rd,Dandenong,160,3
+987844,744,House,165 Victoria Ave,Brunswick,513,3
+986502,776,House,252 Lygon St,Werribee,724,3
+1068145,1003,House,103 Glenferrie Rd,Carlton,205,4
+1123297,815,House,150 Station St,Ballarat,987,4
+843703,799,Unit,124 Victoria Ave,Shepparton,233,4
+772654,715,Unit,230 Main Rd,Box Hill,186,3
+741332,484,Unit,19 Bridge Rd,Essendon,257,4
+771958,466,House,56 Main Rd,Shepparton,877,4
+505545,311,Unit,289 High St,Footscray,134,5
+1039472,607,House,133 Main Rd,Richmond,602,3
+1070222,656,House,257 Station St,Box Hill,200,3
+954049,801,House,44 Chapel St,Werribee,440,4
+788532,477,Unit,106 Station St,Dandenong,74,3
+591382,414,House,164 Station St,Warrnambool,385,3
+1154038,1041,House,56 Lygon St,Dandenong,649,5
+780175,457,Unit,170 Queen St,Toorak,109,5
+605706,539,Unit,222 Queen St,Geelong,207,1
+883285,605,House,200 Chapel St,Hawthorn,571,4
+974201,606,House,296 Main Rd,Warrnambool,532,4
+765076,646,Unit,59 Station St,Ballarat,175,4
+853294,699,Unit,199 Glenferrie Rd,Dandenong,139,3
+802379,734,Unit,89 Glenferrie Rd,Preston,201,5
+961919,827,House,61 Smith St,Brunswick,524,3
+631794,560,Unit,199 Bridge Rd,Brunswick,197,3
+885905,607,House,276 Station St,Geelong,1152,3
+1091529,704,House,231 Smith St,Geelong,169,4
+782319,677,Unit,288 Chapel St,Ballarat,175,3
+878298,779,House,86 Station St,Preston,601,3
+779293,746,Unit,276 King St,Frankston,167,2
+1143448,841,House,282 Station St,Echuca,698,3
+795870,573,Unit,22 Bridge Rd,Sunshine,158,3
+668468,585,House,153 King St,Shepparton,863,3
+654482,463,Unit,108 King St,Carlton,206,4
+1183186,1106,House,72 Glenferrie Rd,Geelong,271,4
+878367,797,House,276 Victoria Ave,Toorak,749,3
+682005,506,House,49 Bridge Rd,Frankston,992,5
+815759,706,House,68 Queen St,Shepparton,809,2
+1232309,1069,House,251 Chapel St,Mildura,700,3
+961379,593,House,39 Station St,Box Hill,719,3
+1067518,986,House,298 Smith St,Reservoir,340,4
+649373,501,Unit,33 Smith St,Mildura,159,2
+856914,767,Unit,146 Smith St,Frankston,83,3
+578892,405,House,25 Smith St,Reservoir,1091,2
+832666,767,House,234 Station St,Geelong,1026,5
+692094,503,House,155 Lygon St,Brunswick,711,4
+457151,266,Unit,43 Victoria Ave,Sunshine,216,4
+666527,617,House,157 Lygon St,Box Hill,336,3
+590958,362,House,40 Station St,Ballarat,1061,3
+550034,385,Unit,62 Smith St,Warrnambool,172,4
+719030,678,House,53 Main Rd,Box Hill,762,3
+1203306,1134,House,74 Queen St,Echuca,167,3
+1000909,798,House,180 Station St,Geelong,460,3
+717859,589,House,112 Station St,Mildura,436,4
+555210,416,Unit,180 Chapel St,Traralgon,85,3
+874539,603,Unit,128 Main Rd,Shepparton,226,4
+1272658,895,House,106 Victoria Ave,Mildura,755,4
+1099848,919,House,198 Station St,Bendigo,295,2
+621581,538,Unit,68 Smith St,Sunshine,195,4
+458750,404,Unit,89 Lygon St,Toorak,247,5
+803815,708,Unit,8 Main Rd,Hawthorn,286,2
+745826,456,Unit,147 Bridge Rd,Box Hill,152,3
+496534,381,Unit,79 Bridge Rd,Toorak,70,2
+767069,460,Unit,168 Bridge Rd,Brunswick,245,3
+460359,363,Unit,159 Main Rd,Shepparton,266,4
+889554,664,House,223 Main Rd,Bendigo,262,3
+540521,496,House,90 Lygon St,Traralgon,431,1
+774269,551,Unit,268 Smith St,Reservoir,82,2
+783462,487,Unit,172 High St,Carlton,66,3
+671939,425,Unit,40 Lygon St,Hawthorn,142,3
+1168990,1017,House,189 Queen St,Hawthorn,360,3
+779930,635,House,117 Main Rd,Traralgon,175,1
+1124160,692,House,197 Smith St,Reservoir,222,2
+915516,558,House,215 Lygon St,Warrnambool,1002,3
+753196,638,House,191 Glenferrie Rd,St Kilda,257,3
+920350,557,House,206 High St,South Yarra,728,4
+1166134,1041,House,234 Bridge Rd,St Kilda,747,3
+815071,692,Unit,125 Glenferrie Rd,Werribee,298,3
+584851,356,House,280 King St,Echuca,989,2
+815123,497,Unit,5 Smith St,Toorak,218,1
+1012948,969,House,54 Victoria Ave,Traralgon,637,3
+1077487,777,House,144 Queen St,Fitzroy,624,1
+723699,521,House,235 Smith St,Warrnambool,1185,3
+816613,726,House,291 Main Rd,Box Hill,417,3
+449157,423,Unit,202 Smith St,Frankston,119,3
+1021124,976,House,300 Queen St,Ballarat,486,2
+611642,530,Unit,62 Chapel St,Dandenong,103,5
+1188068,857,House,62 Victoria Ave,Preston,773,2
+1013052,617,House,76 Smith St,Ballarat,878,4
+642017,562,Unit,154 Lygon St,Fitzroy,94,4
+693743,549,House,282 Bridge Rd,Preston,358,2
+949721,703,House,114 High St,Richmond,970,2
+483801,448,Unit,44 Lygon St,Shepparton,69,5
+685059,425,House,228 Lygon St,Ballarat,829,2
+445457,341,Unit,87 High St,Preston,151,4
+858999,499,House,219 Lygon St,Box Hill,533,3
+1015425,769,House,18 Queen St,Preston,1171,3
+746935,447,Unit,45 High St,Reservoir,157,3
+1120685,698,House,279 King St,South Yarra,885,5
+577183,359,Unit,290 Smith St,Reservoir,96,3
+577397,477,Unit,16 King St,Footscray,170,2
+832333,719,House,120 Glenferrie Rd,Echuca,643,2
+502327,403,Unit,113 High St,Traralgon,264,3
+747612,708,Unit,163 Glenferrie Rd,Bendigo,57,5
+1171618,845,House,289 Queen St,Hawthorn,1158,4
+572856,393,House,20 Station St,Geelong,598,2
+783020,713,House,170 High St,Reservoir,847,4
+685108,454,House,12 High St,Dandenong,440,3
+737241,698,Unit,38 Smith St,South Yarra,219,4
+805153,468,Unit,155 Smith St,Carlton,90,2
+831681,790,House,163 Station St,Shepparton,880,4
+523170,311,Unit,194 Queen St,Hawthorn,125,4
+446977,411,Unit,294 High St,Traralgon,247,4
+1087547,848,House,163 Glenferrie Rd,Geelong,363,3
+496517,476,Unit,122 Main Rd,Dandenong,92,5
+733423,444,Unit,172 Lygon St,Warrnambool,103,1
+989644,782,House,132 Smith St,St Kilda,248,4
+696273,661,Unit,86 Chapel St,Traralgon,146,3
+581035,452,House,246 Main Rd,Box Hill,300,2
+943656,773,House,134 Smith St,Richmond,498,2
+615258,520,House,281 Main Rd,Traralgon,1138,3
+772095,580,House,223 Queen St,Shepparton,828,2
+480287,393,Unit,277 Bridge Rd,Essendon,126,4
+614188,492,Unit,293 Chapel St,Fitzroy,142,2
+730590,675,House,246 Victoria Ave,St Kilda,573,2
+1073101,638,House,243 Main Rd,Werribee,964,3
+583672,400,Unit,47 Victoria Ave,Mildura,276,2
+848870,800,Unit,23 Station St,Geelong,117,3
+676830,622,House,32 Glenferrie Rd,Frankston,348,4
+1126807,848,House,212 Bridge Rd,Sunshine,942,3
+980202,799,House,244 Lygon St,Toorak,311,3
+742656,508,House,258 High St,Warrnambool,1069,2
+792547,515,House,65 King St,Ballarat,1041,3
+495627,374,Unit,133 Queen St,Shepparton,284,5
+436482,311,Unit,204 Bridge Rd,Box Hill,183,4
+687058,551,Unit,268 Glenferrie Rd,Warrnambool,88,2
+867110,526,House,52 Glenferrie Rd,Hawthorn,356,3
+678012,645,Unit,136 Chapel St,Sunshine,196,4
+410333,392,Unit,142 Queen St,Fitzroy,205,2
+984532,832,House,122 Smith St,Box Hill,700,4
+549515,430,Unit,160 Victoria Ave,Dandenong,269,4
+748456,521,Unit,227 Victoria Ave,Brunswick,156,3
+1127653,1004,House,227 King St,St Kilda,983,5
+986719,829,House,29 Smith St,South Yarra,1187,2
+611646,391,House,292 Bridge Rd,Echuca,561,2
+861754,799,Unit,26 Station St,Fitzroy,120,4
+983459,879,House,204 Bridge Rd,Preston,645,4
+495728,467,Unit,91 Station St,Footscray,139,3
+1169716,1001,House,146 Main Rd,Frankston,483,3
+1117974,909,House,116 King St,Ballarat,988,3
+765171,565,Unit,5 Lygon St,Echuca,215,5
+574377,537,Unit,130 King St,Richmond,231,4
+765045,696,Unit,179 Chapel St,Essendon,169,3
+1127050,670,House,204 Glenferrie Rd,South Yarra,916,1
+606309,356,Unit,145 Glenferrie Rd,Footscray,173,4
+566652,409,Unit,167 Lygon St,Frankston,232,3
+1292156,1148,House,265 Queen St,Ballarat,977,4
+662126,633,Unit,14 Queen St,Mildura,116,5
+1132705,719,House,299 High St,Box Hill,605,3
+722682,582,Unit,184 Lygon St,Reservoir,265,4
+789988,571,Unit,50 Victoria Ave,Geelong,116,2
+874142,830,House,172 Lygon St,Geelong,607,2
+438142,395,Unit,134 Smith St,Dandenong,80,3
+1095748,985,House,298 Glenferrie Rd,Shepparton,548,3
+482018,365,Unit,272 Chapel St,Mildura,272,3
+798389,588,Unit,210 Smith St,Ballarat,270,2
+570302,389,House,171 Station St,St Kilda,268,3
+702291,420,House,87 King St,Frankston,330,3
+412447,375,Unit,220 Lygon St,Essendon,172,3
+846806,753,Unit,103 Bridge Rd,Fitzroy,278,5
+810436,779,House,10 King St,South Yarra,659,3
+750653,721,House,67 Victoria Ave,Sunshine,776,3
+607122,480,Unit,149 Victoria Ave,Fitzroy,202,4
+843276,736,Unit,69 Lygon St,Essendon,175,5
+769809,724,House,207 Queen St,Ballarat,418,2
+937937,848,House,259 Glenferrie Rd,Richmond,226,2
+634378,426,House,25 Bridge Rd,Frankston,190,4
+757981,569,Unit,228 Chapel St,Carlton,114,2
+682791,428,Unit,5 King St,Brunswick,75,3
+806840,762,Unit,71 Glenferrie Rd,Frankston,76,4
+811676,658,House,145 Main Rd,Footscray,1169,4
+889478,591,House,268 Victoria Ave,Ballarat,989,3
+949343,793,House,255 Bridge Rd,Fitzroy,1134,4
+759609,619,House,46 High St,Richmond,1161,4
+1091398,780,House,39 Bridge Rd,Echuca,623,5
+889281,552,House,26 Station St,Frankston,230,4
+555002,464,House,219 Smith St,Mildura,243,2
+550671,428,Unit,88 Lygon St,Brunswick,162,3
+629357,550,Unit,191 Main Rd,Traralgon,152,2
+469274,365,Unit,245 Chapel St,Frankston,254,3
+1179340,1067,House,82 High St,Brunswick,1138,3
+663272,523,Unit,195 Queen St,Preston,270,3
+534751,424,Unit,211 Main Rd,Reservoir,116,1
+1161155,1061,House,269 Lygon St,Richmond,842,5
+611272,448,Unit,49 Glenferrie Rd,Warrnambool,113,4
+597430,375,House,198 Lygon St,Mildura,261,4
+598104,352,Unit,241 Bridge Rd,Geelong,69,4
+1001366,869,House,143 Smith St,Bendigo,925,3
+879099,717,Unit,236 Main Rd,Bendigo,164,4
+711349,603,House,162 Station St,Reservoir,186,5
+1128490,743,House,286 High St,Essendon,773,4
+852665,537,Unit,234 Lygon St,Ballarat,63,3
+489781,285,Unit,287 Smith St,Preston,143,4
+1149235,818,House,114 Lygon St,Carlton,747,3
+691917,556,House,24 Main Rd,Sunshine,988,3
+845141,615,House,97 King St,Footscray,954,5
+434602,324,Unit,56 Smith St,Ballarat,212,1
+1159287,1072,House,235 Station St,Echuca,158,5
+812711,578,Unit,222 Bridge Rd,Fitzroy,249,5
+1104777,856,House,66 Queen St,Hawthorn,809,3
+647421,569,Unit,128 Glenferrie Rd,Essendon,137,3
+803227,586,Unit,212 Queen St,Brunswick,190,4
+916966,748,House,112 Bridge Rd,Traralgon,745,2
+724796,659,Unit,92 Lygon St,Brunswick,244,4
+579908,546,Unit,293 Glenferrie Rd,Reservoir,278,4
+584582,370,House,268 High St,Essendon,447,1
+766801,716,House,137 King St,Fitzroy,663,5
+688978,528,House,105 Victoria Ave,Fitzroy,1076,3
+753298,509,Unit,115 Bridge Rd,Mildura,250,2
+699472,527,Unit,196 High St,Mildura,251,3
+817644,780,House,129 High St,Fitzroy,1057,3
+899387,689,House,189 Lygon St,Warrnambool,546,4
+1003401,706,House,39 Lygon St,Geelong,394,5
+392959,322,Unit,285 Victoria Ave,Essendon,199,2
+1182074,791,House,80 Station St,Dandenong,810,2
+468210,284,Unit,155 Lygon St,Echuca,190,4
+1135458,711,House,270 Smith St,Warrnambool,289,5
+737778,462,Unit,275 Bridge Rd,Essendon,106,2
+668134,424,Unit,185 Smith St,Dandenong,242,2
+853263,538,House,5 Bridge Rd,Reservoir,1062,4
+996038,820,House,125 Glenferrie Rd,Footscray,807,4
+639646,414,Unit,132 Chapel St,Carlton,182,1
+906752,644,House,250 Station St,South Yarra,544,3
+1231713,1135,House,86 Main Rd,St Kilda,581,3
+1238788,941,House,218 Lygon St,Ballarat,1041,2
+616306,514,House,79 Lygon St,St Kilda,829,3
+545606,351,Unit,92 High St,St Kilda,197,3
+763002,497,Unit,231 Chapel St,Essendon,54,3
+660975,392,House,4 Bridge Rd,Carlton,243,4
+609970,392,Unit,149 Main Rd,South Yarra,122,3
+781514,535,Unit,16 Lygon St,Box Hill,106,2
+589971,381,House,152 Bridge Rd,Box Hill,914,3
+1102384,674,House,64 Queen St,Toorak,957,1
+836409,521,Unit,108 Victoria Ave,St Kilda,281,2
+757105,571,House,83 Queen St,South Yarra,667,2
+1277870,839,House,291 Lygon St,Geelong,1094,4
+645428,463,Unit,35 Victoria Ave,St Kilda,235,2
+748737,577,House,66 Smith St,Dandenong,292,2
+727198,613,Unit,169 Station St,Reservoir,89,4
+765366,453,House,220 Smith St,Sunshine,654,1
+681634,603,Unit,224 Lygon St,Traralgon,84,4
+748454,613,Unit,184 Station St,Preston,77,3
+867061,527,House,144 Main Rd,Footscray,552,4
+1194416,1090,House,39 Main Rd,Shepparton,213,4
+1267992,1181,House,109 Glenferrie Rd,Box Hill,1116,3
+735284,441,House,201 Smith St,Brunswick,745,4
+535242,366,Unit,47 Bridge Rd,South Yarra,52,3
+1164188,1033,House,85 Lygon St,Footscray,516,3
+491503,425,Unit,248 Queen St,Mildura,244,1
+1074502,696,House,190 Victoria Ave,St Kilda,573,1
+599906,394,Unit,241 Chapel St,Sunshine,60,4
+607478,437,Unit,141 Bridge Rd,Carlton,195,3
+812126,620,House,188 Chapel St,Shepparton,920,3
+433459,353,Unit,177 Smith St,Box Hill,277,4
+776291,558,House,226 Queen St,South Yarra,725,2
+946245,714,House,186 Queen St,Geelong,999,4
+826923,715,Unit,246 Station St,Carlton,91,2
+690848,408,House,125 High St,Essendon,479,2
+742343,500,House,294 High St,South Yarra,678,2
+684513,583,House,289 Glenferrie Rd,Box Hill,730,4
+705012,649,Unit,242 Glenferrie Rd,Preston,262,2
+627748,486,Unit,94 Glenferrie Rd,Brunswick,225,2
+682244,533,House,36 Glenferrie Rd,Footscray,420,3
+523020,323,Unit,259 Bridge Rd,Ballarat,205,4
+1181109,885,House,20 Glenferrie Rd,Reservoir,416,2
+634896,496,Unit,221 Lygon St,Richmond,61,3
+461231,309,Unit,196 Station St,Bendigo,239,3
+578513,394,Unit,131 Queen St,Essendon,282,4
+693031,500,Unit,210 Bridge Rd,Footscray,231,2
+902646,528,House,267 Main Rd,South Yarra,570,3
+878254,615,Unit,80 Main Rd,Sunshine,114,4
+805822,530,Unit,290 Chapel St,Toorak,224,3
+643629,452,Unit,283 Chapel St,Ballarat,193,2
+878265,547,Unit,296 Victoria Ave,Frankston,151,4
+482574,444,Unit,118 Main Rd,Mildura,293,4
+514273,414,Unit,206 Bridge Rd,Ballarat,207,4
+1231702,1032,House,3 Lygon St,Box Hill,1115,4
+967535,852,House,135 Main Rd,St Kilda,227,3
+835593,642,Unit,267 Lygon St,Footscray,202,4
+791480,483,Unit,254 Lygon St,Geelong,267,1
+1144769,897,House,100 Victoria Ave,South Yarra,1195,4
+728092,584,House,87 Glenferrie Rd,Bendigo,150,3
+418056,361,Unit,181 Chapel St,Frankston,101,3
+612502,455,Unit,47 Main Rd,Traralgon,193,4
+1182373,740,House,116 Victoria Ave,Sunshine,977,3
+892145,612,House,209 Queen St,Frankston,1180,3
+725262,520,Unit,132 Bridge Rd,Carlton,297,4
+444339,367,Unit,174 King St,Reservoir,279,4
+813119,648,House,133 Main Rd,Reservoir,601,3
+854096,610,House,181 Chapel St,Dandenong,689,4
+1070004,1023,House,176 Chapel St,St Kilda,515,3
+651619,528,Unit,294 King St,Sunshine,241,2
+831801,556,House,121 King St,Traralgon,573,4
+670200,413,House,183 Glenferrie Rd,Bendigo,395,4
+1249017,794,House,4 Station St,Mildura,910,4
+536940,361,Unit,141 Glenferrie Rd,Reservoir,245,2
+1061874,678,House,296 King St,Box Hill,1016,2
+669702,434,Unit,178 Bridge Rd,Fitzroy,248,4
+628929,432,Unit,236 Bridge Rd,Carlton,53,4
+697605,449,Unit,167 Main Rd,Hawthorn,116,3
+546423,504,Unit,138 King St,Frankston,137,5
+877912,534,Unit,108 Chapel St,Reservoir,145,4
+677081,527,House,231 Victoria Ave,Box Hill,618,3
+849450,624,Unit,285 King St,Frankston,100,4
+704463,673,House,243 Queen St,Traralgon,1173,2
+724722,449,Unit,274 Bridge Rd,Shepparton,126,4
+811373,592,House,204 High St,Hawthorn,272,4
+618904,588,Unit,50 Station St,Frankston,116,4
+726298,661,Unit,132 Bridge Rd,Toorak,81,1
+986998,880,House,296 King St,Footscray,732,5
+580220,392,Unit,250 Bridge Rd,Mildura,147,4
+1019106,655,House,75 Lygon St,Preston,840,3
+796363,664,House,208 Glenferrie Rd,Footscray,853,2
+643254,601,Unit,150 Lygon St,Dandenong,151,3
+475556,376,Unit,267 Smith St,Echuca,97,3
+667273,532,House,129 King St,Traralgon,963,2
+1088695,745,House,281 Station St,St Kilda,963,1
+883358,771,House,135 Main Rd,St Kilda,948,2
+579939,376,House,227 Victoria Ave,Bendigo,499,2
+552823,388,Unit,167 Smith St,Mildura,272,3
+1243401,921,House,70 Station St,Toorak,1085,3
+569080,439,Unit,223 Glenferrie Rd,Shepparton,173,5
+415534,278,Unit,158 Station St,St Kilda,89,3
+770589,479,Unit,70 Bridge Rd,Richmond,186,3
+1220983,991,House,154 Station St,Reservoir,749,4
+994827,684,House,192 Bridge Rd,Richmond,1045,3
+717849,575,Unit,200 Lygon St,Geelong,70,2
+626480,399,Unit,140 Bridge Rd,Bendigo,186,3
+1229376,937,House,94 Main Rd,Ballarat,1082,3
+621262,486,House,252 Glenferrie Rd,Frankston,461,3
+791213,472,Unit,53 Queen St,Richmond,233,3
+890401,629,House,47 King St,Richmond,594,1
+472060,297,Unit,191 Station St,Werribee,58,4
+676492,407,Unit,29 Queen St,Echuca,68,4
+631744,605,Unit,129 King St,Geelong,81,4
+1093293,766,House,127 Station St,Echuca,342,2
+831805,739,Unit,200 Station St,Ballarat,90,5
+783596,529,House,267 Bridge Rd,Fitzroy,761,3
+901057,756,House,112 Lygon St,Fitzroy,1039,2
+582303,506,House,300 Victoria Ave,Geelong,647,3
+692101,558,Unit,80 Station St,Hawthorn,113,4
+1111707,843,House,174 Lygon St,St Kilda,465,2
+1037250,763,House,250 Queen St,Carlton,861,3
+684438,487,Unit,194 High St,Ballarat,114,4
+707114,661,Unit,287 Station St,Warrnambool,175,3
+720728,646,Unit,179 Bridge Rd,Geelong,120,4
+1141695,1082,House,272 Main Rd,Geelong,689,3
+754919,472,Unit,260 High St,Preston,276,4
+859417,737,Unit,123 Glenferrie Rd,Sunshine,218,4
+578441,542,Unit,269 King St,Box Hill,89,4
+591623,383,House,165 Chapel St,Dandenong,286,2
+654390,394,House,17 Queen St,Brunswick,542,2
+544185,469,Unit,199 Lygon St,Hawthorn,229,3
+1219143,973,House,114 Smith St,Fitzroy,577,1
+840978,757,Unit,32 Station St,St Kilda,290,3
+677161,427,House,137 High St,Sunshine,772,4
+773260,683,House,52 Main Rd,South Yarra,538,3
+690639,452,House,292 King St,Mildura,1000,3
+517456,331,Unit,184 Glenferrie Rd,Shepparton,159,4
+662265,424,Unit,206 Bridge Rd,Geelong,186,4
+655752,584,Unit,282 Smith St,Sunshine,155,4
+950896,792,House,124 Smith St,Traralgon,670,3
+1146412,892,House,1 Chapel St,Preston,183,5
+578635,414,House,154 High St,Werribee,794,2
+934772,855,House,284 Victoria Ave,Warrnambool,1092,2
+651669,474,House,188 Victoria Ave,Brunswick,765,2
+784061,699,House,112 Glenferrie Rd,Box Hill,1138,4
+570040,425,Unit,49 Glenferrie Rd,Warrnambool,256,1
+493197,356,Unit,172 High St,St Kilda,161,4
+557413,421,Unit,6 King St,Echuca,184,2
+436486,302,Unit,77 Glenferrie Rd,Toorak,106,3
+968337,837,House,229 Chapel St,Mildura,743,2
+619291,477,Unit,43 Smith St,Brunswick,62,3
+682141,454,Unit,205 Main Rd,Frankston,83,4
+752959,695,Unit,250 King St,Toorak,100,4
+899721,652,House,127 Bridge Rd,Traralgon,1030,2
+578159,454,Unit,58 Main Rd,Hawthorn,139,3
+820746,760,Unit,13 Glenferrie Rd,Sunshine,139,2
+474692,388,Unit,75 Glenferrie Rd,Preston,259,1
+800074,498,House,80 Smith St,Mildura,261,2
+665961,625,Unit,8 Victoria Ave,Brunswick,78,4
+805361,659,House,170 High St,Reservoir,583,4
+607450,429,Unit,281 Victoria Ave,South Yarra,86,3
+863269,544,House,270 Lygon St,Hawthorn,273,3
+633172,559,House,139 Glenferrie Rd,Warrnambool,167,3
+781217,637,House,185 Victoria Ave,Mildura,941,1
+527736,413,Unit,162 Main Rd,South Yarra,186,4
+885253,815,House,235 Bridge Rd,Ballarat,774,1
+588506,518,Unit,10 Queen St,Box Hill,140,4
+609737,387,House,142 Bridge Rd,Bendigo,942,3
+476029,332,Unit,78 King St,Frankston,218,4
+1016420,684,House,267 Chapel St,Traralgon,462,3
+1157914,999,House,230 Smith St,Footscray,433,2
+500911,295,Unit,71 King St,Mildura,280,4
+760919,606,House,290 Queen St,Essendon,392,3
+840914,732,Unit,164 High St,Brunswick,127,5
+578030,528,House,78 Victoria Ave,Shepparton,528,2
+599791,425,House,137 Glenferrie Rd,Footscray,622,3
+876761,783,Unit,69 Station St,St Kilda,145,4
+586055,363,House,243 Station St,Box Hill,613,2
+787293,711,Unit,139 High St,Echuca,221,2
+669885,419,Unit,91 Main Rd,Ballarat,175,4
+906676,662,House,208 Chapel St,Bendigo,929,3
+1060574,937,House,275 Glenferrie Rd,Footscray,1074,3
+653108,414,Unit,266 King St,Fitzroy,60,5
+898648,598,House,26 Lygon St,South Yarra,965,3
+771734,660,Unit,86 Station St,Werribee,285,3
+484251,413,Unit,238 Queen St,South Yarra,178,2
+1049028,864,House,280 Glenferrie Rd,Echuca,812,3
+763015,644,Unit,104 Station St,Geelong,132,2
+687310,540,House,47 Main Rd,Geelong,893,4
+624618,421,House,262 Chapel St,Warrnambool,929,3
+736475,523,House,290 Smith St,Geelong,446,2
+561404,363,Unit,215 High St,Warrnambool,246,3
+1255941,1163,House,61 Queen St,Shepparton,157,5
+748758,600,Unit,235 High St,Frankston,189,4
+725210,530,Unit,112 King St,Reservoir,163,3
+435647,329,Unit,126 High St,Footscray,192,3
+719698,677,Unit,29 Queen St,Geelong,268,1
+668605,425,Unit,153 Glenferrie Rd,Hawthorn,62,5
+655321,526,House,146 Queen St,Geelong,887,5
+827642,639,Unit,166 Victoria Ave,Echuca,259,4
+582600,473,Unit,34 Bridge Rd,Essendon,81,3
+699991,409,House,269 Chapel St,South Yarra,269,4
+1022558,933,House,271 Lygon St,Traralgon,738,3
+710254,664,Unit,270 Victoria Ave,Dandenong,207,5
+552013,438,Unit,255 Lygon St,South Yarra,276,4
+1217883,1029,House,100 Victoria Ave,Warrnambool,1102,2
+792598,738,Unit,213 King St,Carlton,139,1
+664551,564,House,6 King St,Shepparton,671,4
+608971,387,Unit,282 Bridge Rd,Werribee,79,4
+1059221,846,House,15 Glenferrie Rd,Box Hill,842,2
+565693,458,Unit,70 Lygon St,Fitzroy,167,2
+701072,519,Unit,29 Chapel St,Preston,223,3
+464714,400,Unit,107 High St,Toorak,277,4
+891663,835,Unit,16 Victoria Ave,Brunswick,210,5
+905396,845,House,200 Glenferrie Rd,Geelong,781,3
+962353,722,House,212 Victoria Ave,Fitzroy,636,3
+797786,495,Unit,269 King St,Werribee,145,2
+765042,731,House,228 Main Rd,Ballarat,1174,4
+861037,775,Unit,269 Station St,Dandenong,86,4
+1008215,630,House,68 Lygon St,South Yarra,1090,4
+495652,461,Unit,3 Main Rd,South Yarra,225,5
+599352,546,House,24 Station St,Dandenong,789,3
+669065,520,Unit,108 Victoria Ave,Echuca,123,2
+397998,320,Unit,61 Station St,Dandenong,120,2
+1133391,828,House,264 Bridge Rd,Footscray,867,2
+1198792,717,House,146 Queen St,Frankston,787,2
+636132,449,House,26 Station St,Toorak,253,1
+720023,638,Unit,219 Main Rd,Fitzroy,202,2
+451180,261,Unit,183 Station St,Warrnambool,100,3
+664167,468,House,291 Station St,Echuca,1109,2
+713455,521,Unit,239 Lygon St,Werribee,107,2
+937056,734,House,201 Smith St,Frankston,826,4
+833425,776,Unit,34 High St,Reservoir,172,2
+691778,491,House,179 Victoria Ave,Geelong,980,3
+626762,445,Unit,37 Lygon St,Toorak,152,3
+687988,592,House,125 Glenferrie Rd,Bendigo,936,5
+773925,581,Unit,221 Glenferrie Rd,Ballarat,137,3
+560591,372,Unit,40 Queen St,Bendigo,202,2
+652608,490,House,228 Main Rd,Toorak,981,3
+457465,289,Unit,195 Lygon St,Carlton,219,3
+1064078,686,House,298 Queen St,Ballarat,455,4
+547147,421,Unit,296 Chapel St,Werribee,224,2
+476812,352,Unit,156 Lygon St,Hawthorn,284,4
+462721,430,Unit,262 High St,Hawthorn,268,4
+712727,511,House,28 Bridge Rd,Sunshine,885,4
+622878,498,Unit,222 King St,Richmond,232,3
+748264,614,House,280 Chapel St,Box Hill,1122,4
+460400,268,Unit,185 Chapel St,Toorak,273,2
+1292806,1076,House,9 Main Rd,Richmond,1146,4
+653191,422,Unit,71 Main Rd,Brunswick,278,4
+596283,564,Unit,233 Queen St,Footscray,165,3
+1098780,697,House,218 Queen St,Bendigo,634,3
+623371,459,Unit,296 Bridge Rd,Essendon,59,1
+832827,508,Unit,58 Smith St,Warrnambool,70,5
+456371,438,Unit,144 Bridge Rd,Traralgon,183,3
+690511,532,Unit,40 Station St,Bendigo,281,3
+794730,640,Unit,241 High St,Echuca,170,3
+802914,484,Unit,181 Chapel St,Dandenong,59,3
+1170607,1013,House,134 Glenferrie Rd,Werribee,496,3
+450297,296,Unit,14 Victoria Ave,Mildura,82,3
+798722,737,Unit,68 Victoria Ave,Frankston,115,3
+782059,513,House,90 Glenferrie Rd,Carlton,907,4
+943842,614,House,249 King St,Warrnambool,217,4
+554752,328,Unit,79 Glenferrie Rd,Brunswick,155,4
+634084,481,House,86 Station St,Mildura,856,3
+898506,714,House,27 Main Rd,Frankston,1125,3
+567691,342,Unit,120 Bridge Rd,Traralgon,149,4
+981940,859,House,223 Bridge Rd,Brunswick,1069,3
+1070240,804,House,22 Bridge Rd,Dandenong,874,5
+753064,586,Unit,172 Victoria Ave,Shepparton,75,3
+1136189,848,House,237 Chapel St,Hawthorn,549,4
+598322,437,House,161 Queen St,Mildura,289,4
+542066,429,Unit,54 Bridge Rd,Carlton,235,3
+1180380,751,House,13 High St,Ballarat,594,2
+686789,444,House,45 Main Rd,Carlton,528,3
+667735,607,Unit,151 Victoria Ave,Geelong,69,4
+797427,750,Unit,166 Chapel St,Frankston,68,2
+543286,391,Unit,199 Chapel St,Fitzroy,116,5
+1247138,849,House,252 Main Rd,Preston,515,3
+621515,513,Unit,277 Queen St,Carlton,214,2
+1020801,749,House,53 Victoria Ave,Warrnambool,663,2
+752871,442,House,1 Queen St,Reservoir,695,4
+1084445,691,House,295 Chapel St,Dandenong,1154,3
+669831,571,House,277 Main Rd,Box Hill,1137,1
+457535,380,Unit,171 Smith St,Toorak,211,3
+1274119,748,House,175 Bridge Rd,Sunshine,743,4
+485977,322,Unit,21 Bridge Rd,Geelong,126,4
+799587,532,House,250 Smith St,Shepparton,1046,4
+1132389,946,House,13 King St,Fitzroy,279,3
+627883,367,Unit,274 Station St,Werribee,54,5
+739865,456,Unit,22 Smith St,Fitzroy,256,2
+668072,591,House,275 Station St,South Yarra,627,4
+819331,529,House,251 Queen St,Traralgon,243,3
+677598,561,House,8 Queen St,Shepparton,779,3
+618195,413,House,33 Queen St,Footscray,601,2
+696200,428,Unit,173 Chapel St,Ballarat,299,3
+643032,431,House,110 Smith St,Brunswick,837,3
+1049709,897,House,213 Queen St,Frankston,487,4
+763816,692,House,69 High St,Hawthorn,920,4
+1230055,1102,House,4 Main Rd,Reservoir,332,2
+1102576,805,House,244 Chapel St,Werribee,704,2
+1225240,1022,House,90 King St,Essendon,1173,3
+431607,283,Unit,179 Victoria Ave,Shepparton,110,1
+861374,594,House,186 Main Rd,South Yarra,576,3
+438326,404,Unit,77 Main Rd,Ballarat,90,3
+1223461,712,House,146 Smith St,Shepparton,834,3
+755922,461,House,23 Station St,Echuca,510,4
+1019048,669,House,264 Station St,Richmond,631,2
+837578,492,House,215 Smith St,Hawthorn,817,4
+769548,498,House,117 Smith St,Carlton,994,2
+503332,403,Unit,242 Main Rd,Bendigo,161,2
+741361,548,Unit,92 Station St,Footscray,167,3
+421274,388,Unit,104 Victoria Ave,Sunshine,227,2
+525266,468,Unit,57 Queen St,Frankston,93,3
+663074,470,House,81 Glenferrie Rd,Werribee,620,3
+812739,550,Unit,111 Station St,South Yarra,121,4
+488103,353,Unit,127 King St,Essendon,106,3
+1070969,861,House,214 High St,Hawthorn,1113,1
+667209,454,Unit,202 Bridge Rd,Essendon,228,4
+828236,677,House,43 King St,Reservoir,982,4
+705142,518,House,123 Victoria Ave,Sunshine,774,1
+767337,606,House,299 Glenferrie Rd,Preston,1099,5
+467066,348,Unit,190 Queen St,Box Hill,50,4
+1216294,839,House,272 Smith St,Box Hill,702,3
+783712,738,Unit,42 King St,Hawthorn,64,4
+601664,524,Unit,57 High St,Sunshine,208,3
+716509,452,House,287 Queen St,Sunshine,569,3
+798492,727,Unit,59 Bridge Rd,Bendigo,242,4
+575303,440,Unit,165 King St,Ballarat,178,4
+844928,778,Unit,191 Main Rd,Fitzroy,178,3
+508751,450,Unit,273 Station St,Carlton,144,3
+487338,361,Unit,42 Main Rd,Preston,123,4
+1117340,654,House,58 Victoria Ave,Geelong,568,3
+1045620,711,House,214 Victoria Ave,Richmond,1010,3
+1097361,862,House,150 High St,Shepparton,625,2
+684881,562,Unit,297 Chapel St,Dandenong,251,4
+823845,557,Unit,272 Lygon St,Hawthorn,195,3
+624417,394,House,134 Queen St,Werribee,740,3
+1130900,1016,House,234 Victoria Ave,Sunshine,479,3
+876686,838,House,79 Queen St,Geelong,234,2
+738941,576,Unit,134 Station St,Brunswick,193,2
+689782,443,Unit,76 Smith St,Dandenong,299,3
+690145,470,Unit,13 Main Rd,Werribee,246,5
+561952,328,Unit,3 Queen St,Dandenong,125,3
+431013,400,Unit,76 Glenferrie Rd,Echuca,78,3
+1226958,763,House,283 Lygon St,Brunswick,972,3
+1182752,945,House,183 Station St,Bendigo,549,3
+652861,445,House,101 Victoria Ave,Bendigo,1062,2
+759577,600,Unit,252 King St,Box Hill,180,3
+559238,463,Unit,76 Chapel St,Sunshine,145,3
+811604,727,Unit,158 Smith St,Sunshine,72,4
+771999,507,Unit,227 Chapel St,Preston,236,2
+1113258,647,House,45 Queen St,Essendon,1122,2
+968829,610,House,193 Glenferrie Rd,St Kilda,709,1
+862144,796,House,291 Station St,Toorak,931,2
+527713,482,Unit,155 High St,Reservoir,239,3
+657747,531,Unit,79 High St,Richmond,213,3
+518319,419,Unit,148 Lygon St,Carlton,282,2
+840891,700,Unit,142 Main Rd,Richmond,67,5
+793984,512,Unit,247 Glenferrie Rd,Sunshine,210,4
+1199568,1114,House,263 Smith St,Carlton,483,4
+851075,628,House,237 Smith St,Brunswick,258,3
+1104968,800,House,183 Lygon St,Essendon,307,3
+1139963,885,House,94 Lygon St,Echuca,492,3
+480244,286,Unit,155 Lygon St,Dandenong,226,4
+925653,593,House,181 Glenferrie Rd,Toorak,726,1
+1077155,927,House,175 Chapel St,Reservoir,466,2
+688347,419,House,270 Bridge Rd,Ballarat,306,3
+838363,678,Unit,246 High St,Brunswick,142,3
+780311,524,Unit,268 Glenferrie Rd,Preston,127,2
+727012,528,House,66 King St,Carlton,779,4
+1015015,698,House,218 Main Rd,Brunswick,1141,2
+618743,442,House,17 Main Rd,Ballarat,668,3
+1207546,1031,House,6 Lygon St,Werribee,570,4
+1162273,803,House,180 Lygon St,Geelong,718,2
+669699,532,House,257 Queen St,Sunshine,289,3
+774657,589,House,271 High St,Hawthorn,727,4
+1006704,838,House,51 High St,Toorak,1122,5
+955575,896,House,226 Queen St,Hawthorn,876,2
+634266,545,Unit,117 Bridge Rd,Ballarat,130,2
+722097,476,Unit,70 Bridge Rd,Carlton,230,4
+649571,383,Unit,43 High St,Traralgon,148,3
+1023650,694,House,228 Victoria Ave,Footscray,745,3
+653400,527,House,189 Station St,St Kilda,1156,1
+1178644,703,House,44 Bridge Rd,Preston,970,2
+761930,585,Unit,34 Queen St,Traralgon,136,5
+741243,598,Unit,120 Main Rd,Box Hill,121,4
+664034,468,Unit,205 Lygon St,Frankston,204,3
+650714,568,Unit,76 Victoria Ave,South Yarra,114,2
+616702,381,House,69 Lygon St,Bendigo,258,2
+568729,345,Unit,92 High St,Mildura,133,3
+1091819,936,House,50 Glenferrie Rd,Footscray,1158,4
+834401,640,Unit,255 Lygon St,Werribee,188,3
+1010125,850,House,10 Bridge Rd,Toorak,393,5
+715721,533,Unit,227 Chapel St,Dandenong,95,1
+665566,447,Unit,85 Victoria Ave,Echuca,129,3
+730002,651,Unit,292 Main Rd,Echuca,225,4
+855205,756,House,288 Station St,Reservoir,951,3
+433655,366,Unit,181 Chapel St,Hawthorn,57,3
+996020,679,House,179 Smith St,Brunswick,848,4
+539821,434,Unit,183 Smith St,Essendon,219,3
+925403,662,House,160 Lygon St,Bendigo,284,5
+667821,409,Unit,11 Queen St,Dandenong,218,1
+915789,851,House,137 Chapel St,South Yarra,195,4
+802990,506,House,166 Chapel St,Hawthorn,354,4
+1035049,975,House,174 Bridge Rd,Reservoir,894,3
+876702,656,House,39 Lygon St,Reservoir,247,3
