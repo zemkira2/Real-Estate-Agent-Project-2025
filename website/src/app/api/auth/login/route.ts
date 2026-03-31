@@ -4,15 +4,16 @@ import { verifyCredentials, createToken, getTokenCookieOptions } from "@/lib/aut
 export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
+    const cleanedEmail = typeof email === "string" ? email.trim() : "";
 
-    if (!email || !password) {
+    if (!cleanedEmail || !password) {
       return NextResponse.json(
         { error: "Please enter your email and password" },
         { status: 400 }
       );
     }
 
-    const user = await verifyCredentials(email, password);
+    const user = await verifyCredentials(cleanedEmail, password);
     const token = await createToken(user);
 
     const response = NextResponse.json({ user });

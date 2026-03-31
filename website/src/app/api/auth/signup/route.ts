@@ -4,8 +4,10 @@ import { createUser, createToken, getTokenCookieOptions } from "@/lib/auth";
 export async function POST(request: Request) {
   try {
     const { email, password, name } = await request.json();
+    const cleanedEmail = typeof email === "string" ? email.trim() : "";
+    const cleanedName = typeof name === "string" ? name.trim() : "";
 
-    if (!email || !password || !name) {
+    if (!cleanedEmail || !password || !cleanedName) {
       return NextResponse.json(
         { error: "Please fill in all fields" },
         { status: 400 }
@@ -19,7 +21,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const user = await createUser(email, password, name);
+    const user = await createUser(cleanedEmail, password, cleanedName);
     const token = await createToken(user);
 
     const response = NextResponse.json({ user });

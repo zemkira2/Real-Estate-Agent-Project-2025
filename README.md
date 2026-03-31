@@ -1,135 +1,141 @@
 # Real Estate Agent Project
 
-AI-powered property recommendation system for Australian real estate. Includes both a Python CLI/Streamlit backend and a Next.js web application with user authentication and AI-driven suggestions.
+AI-powered property recommendation system for Australian real estate. This repo includes:
+
+- a Python CLI workflow for scoring and filtering mock VIC listings
+- a legacy Streamlit UI
+- a Next.js web app with authentication, property images, ranked results, detail pages, and AI-generated suggestions
 
 ## Project Structure
 
-```
-├── Project.py              # Python CLI: scoring, filtering, Gemini reasoning
-├── front_end.py            # Streamlit UI (legacy)
-├── processing_Data.py      # CSV data generator (1000 VIC properties)
-├── config.py               # Scoring rules and LLM system prompt
-├── vic_properties_1000.csv # Mock property dataset
-├── requirements.txt        # Python dependencies
-└── website/                # Next.js web application
-    ├── src/
-    │   ├── app/            # Pages and API routes
-    │   ├── lib/            # Auth, scoring, data loading
-    │   └── components/     # Reusable UI components
-    └── public/data/        # CSV data for the website
+```text
+.
+|-- Project.py                # Python CLI: scoring, filtering, Gemini reasoning
+|-- front_end.py              # Streamlit UI
+|-- processing_Data.py        # CSV data generator
+|-- config.py                 # Scoring rules and LLM prompt
+|-- vic_properties_1000.csv   # Mock property dataset for Python tools
+|-- requirements.txt          # Python dependencies
+`-- website/
+    |-- public/data/          # CSV data used by the Next.js app
+    |-- src/
+    |   |-- app/              # App Router pages and API routes
+    |   |-- components/       # Reusable UI components
+    |   `-- lib/              # Auth, scoring, and property loading
+    |-- data/users.json       # Local auth store, created automatically
+    `-- package.json          # Website dependencies and scripts
 ```
 
-## Features
+## Current Features
 
-- **User Authentication** - Sign up and log in with email/password (JWT-based)
-- **Smart Search** - Filter by price range, location, property type, bedrooms
-- **Purpose Selection** - Choose "Live" or "Invest" for tailored recommendations
-- **Rule-Based Scoring** - Rental yield, capital growth, and risk evaluation
-- **AI Suggestions** - Gemini-powered analysis with pros, cons, and risk explanations
-- **Responsive UI** - Clean, modern interface with no technical errors shown to users
+- Email/password authentication with JWT sessions
+- Local account persistence in `website/data/users.json`
+- Safe browser-side profile persistence in `localStorage`
+- Search filters for budget, suburb, property type, bedrooms, and buyer purpose
+- Ranked recommendation cards with property images and visible pricing
+- Click-through property detail pages with hero image, price summary, score breakdown, and AI analysis
+- CSV-backed mock property dataset for local development
+- Gemini-powered property suggestions when `GEMINI_API_KEY` is configured
 
 ## Requirements
 
-### Python (CLI / Streamlit)
+### Python tools
 
-- Python 3.9+
+- Python 3.9 or newer
 - `pip install -r requirements.txt`
 
-### Website (Next.js)
+### Website
 
-- Node.js 18+
-- npm
+- Node.js 18 or newer
+- npm 9 or newer
 
 ## Quick Start
 
-### Option 1: Next.js Website (Recommended)
+### Run the Next.js website
 
-```bash
+```powershell
 cd website
 npm install
-cp .env.local.example .env.local   # then edit with your keys
+Copy-Item .env.local.example .env.local
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open `http://localhost:3000`.
 
-### Option 2: Python CLI
+### Run the Python CLI
 
-```bash
+```powershell
 pip install -r requirements.txt
 python Project.py
 ```
 
-### Option 3: Streamlit UI
+### Run the Streamlit UI
 
-```bash
+```powershell
 pip install -r requirements.txt
 python -m streamlit run front_end.py
 ```
 
 ## Environment Variables
 
-Create a `.env.local` file in the `website/` directory:
+Create `website/.env.local`:
 
 ```bash
-# Required: Secret key for JWT authentication
 JWT_SECRET=your-random-secret-key
-
-# Optional: Gemini API key (enables AI suggestions)
 GEMINI_API_KEY=your_gemini_api_key
-
-# Optional: Domain API credentials (enables live property data)
 CLIENT_ID=your_domain_client_id
 CLIENT_SECRET=your_domain_client_secret
 ```
 
-The website works without API keys -- it loads property data from the CSV file. AI suggestions require a Gemini API key.
+Notes:
 
-## How It Works
+- `JWT_SECRET` is required for website authentication.
+- `GEMINI_API_KEY` is optional and enables AI suggestions.
+- `CLIENT_ID` and `CLIENT_SECRET` are optional for Domain API access in the Python flow.
+- The website works without external APIs by using the bundled CSV dataset.
 
-1. **Data Loading** - Properties are loaded from `vic_properties_1000.csv` (1000 mock VIC properties)
-2. **Scoring** - Each property is scored on:
-   - **Rental Yield** (0-10): Based on `(rent * 52) / price`
-   - **Capital Growth** (0-10): Land size + suburb location rules
-   - **Risk** (0-10): Flood, bushfire, and industrial zone penalties
-3. **Ranking** - Final score = `0.4 * growth + 0.4 * yield - 0.2 * risk` (adjusted by purpose)
-4. **AI Analysis** - Gemini generates natural-language explanations for recommended properties
+## Authentication Storage
 
-## Deployment
+The Next.js app now stores auth data in two places:
 
-### Vercel (Recommended for Website)
+- Server-side account records are saved to `website/data/users.json`.
+- The signed-in user profile is mirrored in browser `localStorage` for a smoother local experience.
 
-The Next.js website is ready for Vercel deployment:
+Passwords are not stored in the browser. The server stores hashed passwords only.
 
-```bash
-cd website
-npx vercel
-```
+If you want to reset local website accounts during development, stop the app and delete `website/data/users.json`.
 
-**Important:** For production, you need a real database for user authentication. See the Database section below.
+## How Property Ranking Works
 
-### Database Suggestions
+Each property is scored using the mock dataset:
 
-The current implementation uses in-memory storage for user accounts (suitable for development). For production deployment on Vercel, consider:
+- Rental yield score: based on `(rent_estimate * 52) / price`
+- Capital growth score: based on land size and suburb category
+- Risk score: based on flood, bushfire, and industrial-zone heuristics
+- Final score: weighted combination of growth, yield, and risk
 
-| Database | Free Tier | Best For | Setup |
-|----------|-----------|----------|-------|
-| **Supabase** | 500MB, 50K rows | Full-featured (auth + DB) | [supabase.com](https://supabase.com) |
-| **Vercel Postgres** | 256MB | Tight Vercel integration | Vercel dashboard |
-| **PlanetScale** | 1GB, 1B reads | MySQL-compatible, branching | [planetscale.com](https://planetscale.com) |
-| **Neon** | 512MB | Serverless Postgres | [neon.tech](https://neon.tech) |
+The website can also bias the ranking depending on whether the user is buying to live in the property or invest.
 
-**Recommended:** Supabase -- provides both PostgreSQL database and built-in authentication, has a generous free tier, and integrates well with Next.js.
+## Deployment Notes
 
-To migrate from in-memory to a database:
-1. Replace the `users` Map in `website/src/lib/auth.ts` with database queries
-2. Add a `users` table with columns: `id`, `email`, `password_hash`, `name`, `created_at`
-3. Install the database client library (e.g., `@supabase/supabase-js`)
+The website builds cleanly as a Next.js 14 app and can be deployed to Vercel or another Node-compatible platform.
+
+For local or demo deployment, the JSON auth store is fine. For real production usage, replace `website/data/users.json` with a proper database-backed auth system such as:
+
+- Supabase
+- Vercel Postgres
+- Neon
+- PlanetScale
+
+The main migration point is [website/src/lib/auth.ts](website/src/lib/auth.ts), where file-based reads and writes can be replaced with database queries.
 
 ## Tech Stack
 
-- **Frontend**: Next.js 14, React 18, Tailwind CSS, TypeScript
-- **Auth**: JWT (jose) + bcryptjs
-- **AI**: Google Gemini API
-- **Data**: CSV-based mock dataset (1000 VIC properties)
-- **Python Backend**: pandas, Streamlit, google-genai
+- Next.js 14
+- React 18
+- TypeScript
+- Tailwind CSS
+- jose for JWT handling
+- bcryptjs for password hashing
+- Google Gemini API
+- pandas and Streamlit for the Python tools

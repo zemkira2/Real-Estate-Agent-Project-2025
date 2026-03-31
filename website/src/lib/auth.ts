@@ -1,12 +1,15 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import bcrypt from "bcryptjs";
+import fs from "fs/promises";
+import path from "path";
 
 const JWT_SECRET = new TextEncoder().encode(
   process.env.JWT_SECRET || "default-secret-change-in-production"
 );
 
 const COOKIE_NAME = "auth-token";
+const USER_STORE_PATH = path.join(process.cwd(), "data", "users.json");
 
 export interface User {
   id: string;
@@ -18,32 +21,94 @@ interface StoredUser extends User {
   passwordHash: string;
 }
 
-// In-memory user store for development.
-// For production, replace with a database (Supabase, Vercel Postgres, etc.)
-const users: Map<string, StoredUser> = new Map();
+function normaliseEmail(email: string): string {
+  return email.trim().toLowerCase();
+}
+
+function sanitiseName(name: string): string {
+  return name.trim().replace(/\s+/g, " ");
+}
+
+async function ensureUserStore(): Promise<void> {
+  await fs.mkdir(path.dirname(USER_STORE_PATH), { recursive: true });
+
+  try {
+    await fs.access(USER_STORE_PATH);
+  } catch {
+    await fs.writeFile(USER_STORE_PATH, "[]", "utf-8");
+  }
+}
+
+function isStoredUser(value: unknown): value is StoredUser {
+  if (!value || typeof value !== "object") return false;
+
+  const candidate = value as Partial<StoredUser>;
+  return (
+    typeof candidate.id === "string" &&
+    typeof candidate.email === "string" &&
+    typeof candidate.name === "string" &&
+    typeof candidate.passwordHash === "string"
+  );
+}
+
+async function readStoredUsers(): Promise<StoredUser[]> {
+  await ensureUserStore();
+
+  try {
+    const raw = await fs.readFile(USER_STORE_PATH, "utf-8");
+    const parsed: unknown = JSON.parse(raw);
+
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+
+    return parsed.filter(isStoredUser);
+  } catch {
+    return [];
+  }
+}
+
+async function writeStoredUsers(users: StoredUser[]): Promise<void> {
+  await ensureUserStore();
+  await fs.writeFile(USER_STORE_PATH, JSON.stringify(users, null, 2), "utf-8");
+}
 
 export async function createUser(
   email: string,
   password: string,
   name: string
 ): Promise<User> {
-  if (users.has(email)) {
+  const normalisedEmail = normaliseEmail(email);
+  const cleanedName = sanitiseName(name);
+  const users = await readStoredUsers();
+
+  if (users.some((user) => user.email === normalisedEmail)) {
     throw new Error("An account with this email already exists");
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
   const id = crypto.randomUUID();
-  const user: StoredUser = { id, email, name, passwordHash };
-  users.set(email, user);
+  const user: StoredUser = {
+    id,
+    email: normalisedEmail,
+    name: cleanedName,
+    passwordHash,
+  };
 
-  return { id, email, name };
+  users.push(user);
+  await writeStoredUsers(users);
+
+  return { id, email: user.email, name: user.name };
 }
 
 export async function verifyCredentials(
   email: string,
   password: string
 ): Promise<User> {
-  const user = users.get(email);
+  const normalisedEmail = normaliseEmail(email);
+  const users = await readStoredUsers();
+  const user = users.find((storedUser) => storedUser.email === normalisedEmail);
+
   if (!user) {
     throw new Error("Invalid email or password");
   }

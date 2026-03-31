@@ -1,7 +1,7 @@
 import { parse } from "csv-parse/sync";
 import fs from "fs";
 import path from "path";
-import { Property, addScores, ScoredProperty } from "./scoring";
+import { Property, addScores, ScoredProperty, getPropertyImage } from "./scoring";
 
 let cachedProperties: ScoredProperty[] | null = null;
 
@@ -22,8 +22,17 @@ export function loadProperties(): ScoredProperty[] {
       }
       return value;
     },
-  });
+  }).map((row: Omit<Property, "id" | "image">, index: number) => ({
+    ...row,
+    id: index,
+    image: getPropertyImage(index, row.property_type),
+  }));
 
   cachedProperties = addScores(records);
   return cachedProperties;
+}
+
+export function getPropertyById(id: number): ScoredProperty | undefined {
+  const all = loadProperties();
+  return all.find((p) => p.id === id);
 }

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+const LOCAL_AUTH_USER_KEY = "rea-auth-user";
+
 interface NavbarProps {
   userName: string;
 }
@@ -12,16 +14,17 @@ export default function Navbar({ userName }: NavbarProps) {
 
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
+    window.localStorage.removeItem(LOCAL_AUTH_USER_KEY);
     router.push("/");
   }
 
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-3">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link href="/dashboard" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+    <header className="bg-primary-900 border-b border-white/8 px-6">
+      <div className="max-w-7xl mx-auto h-14 flex items-center justify-between">
+        <Link href="/dashboard" className="flex items-center gap-2.5">
+          <div className="w-7 h-7 bg-gold-400 rounded-lg flex items-center justify-center">
             <svg
-              className="w-5 h-5 text-white"
+              className="w-4 h-4 text-primary-950"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -34,18 +37,19 @@ export default function Navbar({ userName }: NavbarProps) {
               />
             </svg>
           </div>
-          <span className="text-lg font-bold text-gray-900">
-            Real Estate Agent
+          <span className="font-display text-base font-medium text-white tracking-tight">
+            Estate
           </span>
         </Link>
 
         <div className="flex items-center gap-4">
-          <span className="text-sm text-gray-600">
-            Welcome, <span className="font-medium text-gray-900">{userName}</span>
+          <span className="text-sm text-white/50 hidden sm:block">
+            Welcome,{" "}
+            <span className="text-white/80 font-medium">{userName}</span>
           </span>
           <button
             onClick={handleLogout}
-            className="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            className="px-3.5 py-1.5 text-xs font-semibold text-white/60 hover:text-white border border-white/15 hover:border-white/30 rounded-lg transition-all"
           >
             Log Out
           </button>

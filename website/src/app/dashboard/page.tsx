@@ -6,6 +6,8 @@ import Navbar from "@/components/Navbar";
 import PropertyCard from "@/components/PropertyCard";
 import { ScoredProperty } from "@/lib/scoring";
 
+const LOCAL_AUTH_USER_KEY = "rea-auth-user";
+
 interface User {
   id: string;
   email: string;
@@ -43,12 +45,15 @@ export default function DashboardPage() {
       try {
         const res = await fetch("/api/auth/me");
         if (!res.ok) {
+          window.localStorage.removeItem(LOCAL_AUTH_USER_KEY);
           router.push("/login");
           return;
         }
         const data = await res.json();
         setUser(data.user);
+        window.localStorage.setItem(LOCAL_AUTH_USER_KEY, JSON.stringify(data.user));
       } catch {
+        window.localStorage.removeItem(LOCAL_AUTH_USER_KEY);
         router.push("/login");
       } finally {
         setLoading(false);
@@ -150,8 +155,11 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600" />
+      <div className="min-h-screen flex items-center justify-center bg-stone-50">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-2 border-primary-900/20 border-t-primary-900 rounded-full animate-spin" />
+          <p className="text-stone-400 text-sm">Loading…</p>
+        </div>
       </div>
     );
   }
@@ -159,32 +167,33 @@ export default function DashboardPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-stone-50">
       <Navbar userName={user.name} />
 
       <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid lg:grid-cols-[320px_1fr] gap-8">
-          {/* Sidebar - Search Form */}
-          <div className="space-y-6">
-            <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+        <div className="grid lg:grid-cols-[280px_1fr] gap-7">
+
+          {/* ── Sidebar ── */}
+          <div>
+            <div className="bg-white rounded-2xl border border-stone-200/70 shadow-card p-6 sticky top-6">
+              <h2 className="font-display text-lg font-medium text-primary-900 mb-5">
                 Search Criteria
               </h2>
 
               {/* Purpose */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+              <div className="mb-5">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-stone-400 mb-2">
                   Purpose
-                </label>
-                <div className="grid grid-cols-3 gap-2">
+                </p>
+                <div className="grid grid-cols-3 gap-1.5">
                   {(["any", "live", "invest"] as const).map((p) => (
                     <button
                       key={p}
                       onClick={() => setPurpose(p)}
-                      className={`px-3 py-2 text-sm rounded-lg border transition-colors ${
+                      className={`py-2 text-xs font-semibold rounded-lg border transition-all ${
                         purpose === p
-                          ? "bg-primary-600 text-white border-primary-600"
-                          : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                          ? "bg-primary-900 text-white border-primary-900"
+                          : "bg-white text-stone-600 border-stone-200 hover:border-stone-300"
                       }`}
                     >
                       {p === "any" ? "Any" : p === "live" ? "Live" : "Invest"}
@@ -195,58 +204,68 @@ export default function DashboardPage() {
 
               {/* Budget */}
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-[10px] font-semibold uppercase tracking-wider text-stone-400 mb-1.5">
                   Min Budget
                 </label>
-                <input
-                  type="number"
-                  value={budgetMin}
-                  onChange={(e) => setBudgetMin(Number(e.target.value))}
-                  min={0}
-                  step={10000}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none"
-                />
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-sm">
+                    $
+                  </span>
+                  <input
+                    type="number"
+                    value={budgetMin}
+                    onChange={(e) => setBudgetMin(Number(e.target.value))}
+                    min={0}
+                    step={10000}
+                    className="w-full pl-7 pr-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-sm text-primary-900 focus:outline-none focus:ring-2 focus:ring-primary-900/10 focus:border-primary-900/30 transition-all"
+                  />
+                </div>
               </div>
 
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+              <div className="mb-5">
+                <label className="block text-[10px] font-semibold uppercase tracking-wider text-stone-400 mb-1.5">
                   Max Budget
                 </label>
-                <input
-                  type="number"
-                  value={budgetMax}
-                  onChange={(e) => setBudgetMax(Number(e.target.value))}
-                  min={0}
-                  step={10000}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none"
-                />
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-sm">
+                    $
+                  </span>
+                  <input
+                    type="number"
+                    value={budgetMax}
+                    onChange={(e) => setBudgetMax(Number(e.target.value))}
+                    min={0}
+                    step={10000}
+                    className="w-full pl-7 pr-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-sm text-primary-900 focus:outline-none focus:ring-2 focus:ring-primary-900/10 focus:border-primary-900/30 transition-all"
+                  />
+                </div>
               </div>
 
               {/* Property Type */}
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-[10px] font-semibold uppercase tracking-wider text-stone-400 mb-1.5">
                   Property Type
                 </label>
                 <select
                   value={propertyType}
                   onChange={(e) => setPropertyType(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none"
+                  className="w-full px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-sm text-primary-900 focus:outline-none focus:ring-2 focus:ring-primary-900/10 focus:border-primary-900/30 transition-all appearance-none cursor-pointer"
                 >
-                  <option value="Any">Any</option>
+                  <option value="Any">Any type</option>
                   <option value="House">House</option>
                   <option value="Unit">Unit</option>
                 </select>
               </div>
 
               {/* Bedrooms */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+              <div className="mb-5">
+                <label className="block text-[10px] font-semibold uppercase tracking-wider text-stone-400 mb-1.5">
                   Min Bedrooms
                 </label>
                 <select
                   value={minBedrooms}
                   onChange={(e) => setMinBedrooms(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none"
+                  className="w-full px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-sm text-primary-900 focus:outline-none focus:ring-2 focus:ring-primary-900/10 focus:border-primary-900/30 transition-all appearance-none cursor-pointer"
                 >
                   <option value={0}>Any</option>
                   <option value={1}>1+</option>
@@ -258,60 +277,69 @@ export default function DashboardPage() {
               </div>
 
               {/* Suburbs */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Preferred Suburbs
-                </label>
-                <div className="max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-2 space-y-1">
+              <div className="mb-5">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-stone-400">
+                    Suburbs
+                  </p>
+                  {selectedSuburbs.length > 0 && (
+                    <button
+                      onClick={() => setSelectedSuburbs([])}
+                      className="text-[10px] text-gold-600 hover:text-gold-700 font-semibold uppercase tracking-wide"
+                    >
+                      Clear ({selectedSuburbs.length})
+                    </button>
+                  )}
+                </div>
+                <div className="max-h-44 overflow-y-auto rounded-xl border border-stone-200 bg-stone-50 p-1.5 space-y-0.5">
                   {allSuburbs.map((suburb) => (
                     <label
                       key={suburb}
-                      className="flex items-center gap-2 px-2 py-1 hover:bg-gray-50 rounded cursor-pointer"
+                      className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg cursor-pointer transition-colors ${
+                        selectedSuburbs.includes(suburb)
+                          ? "bg-primary-50 text-primary-900"
+                          : "hover:bg-white text-stone-600"
+                      }`}
                     >
                       <input
                         type="checkbox"
                         checked={selectedSuburbs.includes(suburb)}
                         onChange={() => handleSuburbToggle(suburb)}
-                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                        className="rounded border-stone-300 text-primary-900 focus:ring-primary-900/20 w-3.5 h-3.5"
                       />
-                      <span className="text-sm text-gray-700">{suburb}</span>
+                      <span className="text-xs font-medium">{suburb}</span>
                     </label>
                   ))}
                 </div>
-                {selectedSuburbs.length > 0 && (
-                  <button
-                    onClick={() => setSelectedSuburbs([])}
-                    className="text-xs text-primary-600 hover:text-primary-700 mt-1"
-                  >
-                    Clear all
-                  </button>
-                )}
               </div>
 
               <button
                 onClick={searchProperties}
                 disabled={searching}
-                className="w-full px-4 py-2.5 text-white bg-primary-600 rounded-lg hover:bg-primary-700 transition-colors font-medium disabled:opacity-50"
+                className="w-full py-3 text-sm font-semibold text-primary-950 bg-gold-400 hover:bg-gold-300 rounded-xl transition-all hover:shadow-gold disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {searching ? "Searching..." : "Search Properties"}
+                {searching ? "Searching…" : "Search Properties"}
               </button>
             </div>
           </div>
 
-          {/* Main Content */}
-          <div className="space-y-6">
+          {/* ── Main Content ── */}
+          <div className="space-y-5 min-w-0">
             {/* Results header */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-start justify-between gap-4">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">
+                <h1 className="font-display text-2xl font-medium text-primary-900">
                   Top Recommendations
                 </h1>
                 {totalMatches > 0 && (
-                  <p className="text-sm text-gray-500 mt-1">
-                    Showing top {properties.length} of {totalMatches} matching
-                    properties
+                  <p className="text-stone-400 text-sm mt-1">
+                    Showing top {properties.length} of{" "}
+                    <span className="font-medium text-stone-600">
+                      {totalMatches}
+                    </span>{" "}
+                    matching properties
                     {purpose !== "any" && (
-                      <span className="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-primary-100 text-primary-700">
+                      <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wide bg-gold-100 text-gold-700">
                         {purpose === "live" ? "For Living" : "For Investment"}
                       </span>
                     )}
@@ -323,10 +351,10 @@ export default function DashboardPage() {
                 <button
                   onClick={getAiSuggestion}
                   disabled={aiLoading}
-                  className="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 flex items-center gap-2"
+                  className="shrink-0 px-4 py-2 text-xs font-semibold text-white bg-primary-900 hover:bg-primary-800 rounded-xl transition-colors disabled:opacity-50 flex items-center gap-2"
                 >
                   <svg
-                    className="w-4 h-4"
+                    className="w-3.5 h-3.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -338,21 +366,33 @@ export default function DashboardPage() {
                       d="M13 10V3L4 14h7v7l9-11h-7z"
                     />
                   </svg>
-                  {aiLoading ? "Generating..." : "Get AI Suggestion"}
+                  {aiLoading ? "Generating…" : "Get AI Suggestion"}
                 </button>
               )}
             </div>
 
             {/* Search message */}
             {searchMessage && (
-              <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-xl text-yellow-800 text-sm">
+              <div className="p-4 bg-amber-50 border border-amber-100 rounded-xl text-amber-800 text-sm">
                 {searchMessage}
               </div>
             )}
 
+            {/* Searching skeleton */}
+            {searching && (
+              <div className="space-y-4">
+                {[1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="h-48 bg-white rounded-2xl border border-stone-200/70 animate-pulse"
+                  />
+                ))}
+              </div>
+            )}
+
             {/* Property cards */}
-            {properties.length > 0 && (
-              <div className="grid gap-4">
+            {!searching && properties.length > 0 && (
+              <div className="space-y-4">
                 {properties.map((property, index) => (
                   <PropertyCard
                     key={`${property.address}-${property.suburb}`}
@@ -363,28 +403,30 @@ export default function DashboardPage() {
               </div>
             )}
 
-            {/* AI Suggestion */}
+            {/* AI Error */}
             {aiError && (
-              <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+              <div className="p-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-sm">
                 {aiError}
               </div>
             )}
 
+            {/* AI Loading */}
             {aiLoading && (
-              <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-8 text-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto mb-3" />
-                <p className="text-gray-600">
-                  AI is analysing your properties...
+              <div className="bg-white rounded-2xl border border-stone-200/70 shadow-card p-10 text-center">
+                <div className="w-8 h-8 border-2 border-primary-900/20 border-t-primary-900 rounded-full animate-spin mx-auto mb-3" />
+                <p className="text-stone-400 text-sm">
+                  AI is analysing your properties…
                 </p>
               </div>
             )}
 
+            {/* AI Suggestion */}
             {aiSuggestion && (
-              <div className="bg-white rounded-xl border border-purple-100 shadow-sm p-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+              <div className="bg-white rounded-2xl border border-stone-200/70 shadow-card p-7">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-8 h-8 bg-primary-900 rounded-lg flex items-center justify-center">
                     <svg
-                      className="w-5 h-5 text-purple-600"
+                      className="w-4 h-4 text-gold-400"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -397,12 +439,12 @@ export default function DashboardPage() {
                       />
                     </svg>
                   </div>
-                  <h2 className="text-lg font-semibold text-gray-900">
+                  <h2 className="font-display text-lg font-medium text-primary-900">
                     AI Analysis
                   </h2>
                 </div>
                 <div
-                  className="ai-markdown text-gray-700"
+                  className="ai-markdown"
                   dangerouslySetInnerHTML={{
                     __html: renderMarkdown(aiSuggestion),
                   }}

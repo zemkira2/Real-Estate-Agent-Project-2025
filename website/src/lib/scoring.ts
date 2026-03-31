@@ -1,4 +1,5 @@
 export interface Property {
+  id: number;
   price: number;
   rent_estimate: number;
   property_type: string;
@@ -6,6 +7,7 @@ export interface Property {
   suburb: string;
   land_size: number;
   bedrooms: number;
+  image: string;
 }
 
 export interface ScoredProperty extends Property {
@@ -13,6 +15,32 @@ export interface ScoredProperty extends Property {
   growth_score: number;
   risk_score: number;
   final_score: number;
+}
+
+// Deterministic house images based on property id
+const HOUSE_IMAGES = [
+  "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=600&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=600&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=600&h=400&fit=crop",
+];
+
+const UNIT_IMAGES = [
+  "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=600&h=400&fit=crop",
+];
+
+export function getPropertyImage(id: number, propertyType: string): string {
+  const images = propertyType === "House" ? HOUSE_IMAGES : UNIT_IMAGES;
+  return images[id % images.length];
 }
 
 const CITY_SUBURBS = [
