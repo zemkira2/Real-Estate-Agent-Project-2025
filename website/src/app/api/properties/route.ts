@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { loadProperties } from "@/lib/properties";
+import { loadProperties, searchLiveProperties } from "@/lib/properties";
 import { filterProperties, rankProperties, getAllSuburbs } from "@/lib/scoring";
 
 export async function GET(request: NextRequest) {
@@ -15,32 +15,64 @@ export async function GET(request: NextRequest) {
     const minBedrooms = Number(searchParams.get("minBedrooms") || 0);
     const purpose = (searchParams.get("purpose") || "any") as "invest" | "live" | "any";
     const topN = Number(searchParams.get("topN") || 5);
+    const live = searchParams.get("live") === "true";
 
-    const allProperties = loadProperties();
-    const filtered = filterProperties(allProperties, {
-      budgetMin,
-      budgetMax,
-      propertyType,
-      suburbs,
-      minBedrooms,
-      purpose,
-    });
+    let allProperties;
+    let dataSource: string;
 
-    if (filtered.length === 0) {
-      return NextResponse.json({
-        properties: [],
-        allSuburbs: getAllSuburbs(),
-        message: "No properties match your criteria. Try widening your search.",
+    if (live) {
+      // Live search directly against Domain API
+      allProperties = await searchLiveProperties({
+        minPrice: budgetMin > 0 ? budgetMin : undefined,
+        maxPrice: budgetMax < 2000000 ? budgetMax : undefined,
+        minBedrooms: minBedrooms > 0 ? minBedrooms : undefined,
+        propertyTypes:
+          propertyType !== "Any"
+            ? [propertyType === "House" ? "House" : "ApartmentUnitFlat"]
+            : undefined,
+        suburbs: suburbs.length > 0 ? suburbs : undefined,
       });
+      dataSource = "domain-live";
+    } else {
+      allProperties = await loadProperties();
+      dataSource = "domain-cache";
     }
 
-    const ranked = rankProperties(filtered, topN, purpose);
+    const filtered = live
+      ? rankProperties(allProperties, topN, purpose)
+      : (() => {
+          const f = filterProperties(allProperties, {
+            budgetMin,
+            budgetMax,
+            propertyType,
+            suburbs,
+            minBedrooms,
+            purpose,
+          });
+          return f.length === 0 ? f : rankProperties(f, topN, purpose);
+        })();
 
-    return NextResponse.json({
-      properties: ranked,
-      totalMatches: filtered.length,
-      allSuburbs: getAllSuburbs(),
-    });
+    if (filtered.length === 0) {
+      return NextResponse.json(
+        {
+          properties: [],
+          allSuburbs: getAllSuburbs(),
+          dataSource,
+          message: "No properties match your criteria. Try widening your search.",
+        },
+        { headers: { "X-Data-Source": dataSource } }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        properties: filtered,
+        totalMatches: allProperties.length,
+        allSuburbs: getAllSuburbs(),
+        dataSource,
+      },
+      { headers: { "X-Data-Source": dataSource } }
+    );
   } catch {
     return NextResponse.json(
       { error: "Unable to load properties. Please try again later." },

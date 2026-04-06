@@ -7,6 +7,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "rimh2.domainstatic.com.au",
+      },
+      {
+        protocol: "https",
+        hostname: "bucket-api.domain.com.au",
+      },
     ],
   },
 };
