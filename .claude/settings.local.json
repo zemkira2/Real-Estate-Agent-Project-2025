@@ -8,7 +8,12 @@
       "mcp__Claude_Preview__preview_start",
       "Bash(gh pr:*)",
       "Bash(mkdir -p \"D:\\\\HomeWork\\\\Summer Project\\\\Real-Estate-Agent-Project-2025\\\\.claude\\\\worktrees\\\\frosty-easley\\\\website\\\\src\\\\app\\\\api\\\\properties\\\\[id]\")",
-      "Bash(mkdir -p \"D:\\\\HomeWork\\\\Summer Project\\\\Real-Estate-Agent-Project-2025\\\\.claude\\\\worktrees\\\\frosty-easley\\\\website\\\\src\\\\app\\\\dashboard\\\\property\\\\[id]\")"
+      "Bash(mkdir -p \"D:\\\\HomeWork\\\\Summer Project\\\\Real-Estate-Agent-Project-2025\\\\.claude\\\\worktrees\\\\frosty-easley\\\\website\\\\src\\\\app\\\\dashboard\\\\property\\\\[id]\")",
+      "Bash(npx tsc:*)",
+      "Bash(./node_modules/.bin/tsc --noEmit)",
+      "Bash(ls node_modules/.bin/ts*)",
+      "Bash(npm install:*)",
+      "Bash(node_modules/.bin/tsc --noEmit)"
     ]
   }
 }
