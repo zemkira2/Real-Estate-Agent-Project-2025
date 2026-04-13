@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
-const LOCAL_AUTH_USER_KEY = "rea-auth-user";
+import Logo from "@/components/Logo";
+import { LOCAL_AUTH_USER_KEY } from "@/lib/constants";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -57,25 +57,8 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col items-center justify-center px-4">
       {/* Brand mark */}
-      <Link href="/" className="flex items-center gap-2.5 mb-10">
-        <div className="w-9 h-9 bg-gold-400 rounded-xl flex items-center justify-center shadow-gold">
-          <svg
-            className="w-5 h-5 text-primary-950"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"
-            />
-          </svg>
-        </div>
-        <span className="font-display text-xl font-medium text-primary-900">
-          Estate
-        </span>
+      <Link href="/" className="mb-10">
+        <Logo />
       </Link>
 
       <div className="w-full max-w-sm">

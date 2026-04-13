@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PropertyCard from "@/components/PropertyCard";
 import { ScoredProperty } from "@/lib/scoring";
-
-const LOCAL_AUTH_USER_KEY = "rea-auth-user";
+import { LOCAL_AUTH_USER_KEY } from "@/lib/constants";
+import { renderMarkdown } from "@/lib/markdown";
 
 interface User {
   id: string;
@@ -456,23 +456,4 @@ export default function DashboardPage() {
       </div>
     </div>
   );
-}
-
-// Simple markdown renderer (no external dependency)
-function renderMarkdown(text: string): string {
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/^### (.+)$/gm, "<h3>$1</h3>")
-    .replace(/^## (.+)$/gm, "<h2>$1</h2>")
-    .replace(/^# (.+)$/gm, "<h1>$1</h1>")
-    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-    .replace(/\*(.+?)\*/g, "<em>$1</em>")
-    .replace(/^- (.+)$/gm, "<li>$1</li>")
-    .replace(/(<li>.*<\/li>\n?)+/g, "<ul>$&</ul>")
-    .replace(/\n\n/g, "</p><p>")
-    .replace(/\n/g, "<br>")
-    .replace(/^/, "<p>")
-    .replace(/$/, "</p>");
 }
