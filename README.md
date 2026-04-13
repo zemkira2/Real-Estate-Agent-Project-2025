@@ -1,141 +1,104 @@
 # Real Estate Agent Project
 
-AI-powered property recommendation system for Australian real estate. This repo includes:
-
-- a Python CLI workflow for scoring and filtering mock VIC listings
-- a legacy Streamlit UI
-- a Next.js web app with authentication, property images, ranked results, detail pages, and AI-generated suggestions
+AI-powered property recommendation system for Australian real estate, built with Next.js.
 
 ## Project Structure
 
 ```text
-.
-|-- Project.py                # Python CLI: scoring, filtering, Gemini reasoning
-|-- front_end.py              # Streamlit UI
-|-- processing_Data.py        # CSV data generator
-|-- config.py                 # Scoring rules and LLM prompt
-|-- vic_properties_1000.csv   # Mock property dataset for Python tools
-|-- requirements.txt          # Python dependencies
-`-- website/
-    |-- public/data/          # CSV data used by the Next.js app
-    |-- src/
-    |   |-- app/              # App Router pages and API routes
-    |   |-- components/       # Reusable UI components
-    |   `-- lib/              # Auth, scoring, and property loading
-    |-- data/users.json       # Local auth store, created automatically
-    `-- package.json          # Website dependencies and scripts
+website/
+├── public/data/              # CSV property dataset
+├── data/users.json           # Local auth store (auto-created)
+├── src/
+│   ├── app/
+│   │   ├── page.tsx          # Landing page
+│   │   ├── login/            # Login page
+│   │   ├── signup/           # Signup page
+│   │   ├── dashboard/
+│   │   │   ├── page.tsx      # Search & ranked results
+│   │   │   └── property/[id] # Property detail page
+│   │   └── api/
+│   │       ├── auth/         # Login, signup, logout, me
+│   │       ├── properties/   # Search & single property
+│   │       └── ai-suggestion # Gemini-powered analysis
+│   ├── components/
+│   │   ├── Logo.tsx          # Brand logo
+│   │   ├── Navbar.tsx        # Navigation bar
+│   │   └── PropertyCard.tsx  # Property result card
+│   ├── lib/
+│   │   ├── auth.ts           # JWT auth & user storage
+│   │   ├── constants.ts      # Shared constants
+│   │   ├── markdown.ts       # Markdown renderer
+│   │   ├── properties.ts     # CSV data loading
+│   │   └── scoring.ts        # Property scoring algorithm
+│   └── middleware.ts         # Route protection
+├── .env.local.example        # Environment variable template
+├── tailwind.config.ts        # Custom theme (primary/gold palette)
+└── package.json
 ```
 
-## Current Features
+## Features
 
 - Email/password authentication with JWT sessions
-- Local account persistence in `website/data/users.json`
-- Safe browser-side profile persistence in `localStorage`
-- Search filters for budget, suburb, property type, bedrooms, and buyer purpose
-- Ranked recommendation cards with property images and visible pricing
-- Click-through property detail pages with hero image, price summary, score breakdown, and AI analysis
-- CSV-backed mock property dataset for local development
-- Gemini-powered property suggestions when `GEMINI_API_KEY` is configured
+- Local account persistence in `data/users.json`
+- Search filters: budget, suburb, property type, bedrooms, buyer purpose
+- Ranked property recommendations with scoring breakdown
+- Property detail pages with hero image, price summary, and AI analysis
+- Gemini-powered AI suggestions (optional)
+- CSV-backed mock dataset for local development
 
-## Requirements
+## Tech Stack
 
-### Python tools
-
-- Python 3.9 or newer
-- `pip install -r requirements.txt`
-
-### Website
-
-- Node.js 18 or newer
-- npm 9 or newer
+- Next.js 14 / React 18
+- TypeScript
+- Tailwind CSS
+- jose (JWT handling)
+- bcryptjs (password hashing)
+- Google Gemini API (optional)
 
 ## Quick Start
 
-### Run the Next.js website
-
-```powershell
+```bash
 cd website
 npm install
-Copy-Item .env.local.example .env.local
+cp .env.local.example .env.local   # then edit with your values
 npm run dev
 ```
 
 Open `http://localhost:3000`.
 
-### Run the Python CLI
-
-```powershell
-pip install -r requirements.txt
-python Project.py
-```
-
-### Run the Streamlit UI
-
-```powershell
-pip install -r requirements.txt
-python -m streamlit run front_end.py
-```
-
 ## Environment Variables
 
-Create `website/.env.local`:
+Create `website/.env.local` from the example file:
 
-```bash
-JWT_SECRET=your-random-secret-key
-GEMINI_API_KEY=your_gemini_api_key
-CLIENT_ID=your_domain_client_id
-CLIENT_SECRET=your_domain_client_secret
-```
+| Variable | Required | Description |
+|---|---|---|
+| `JWT_SECRET` | Yes | Random secret key for signing JWT tokens |
+| `GEMINI_API_KEY` | No | Enables AI property suggestions |
+| `CLIENT_ID` | No | Domain.com.au API client ID |
+| `CLIENT_SECRET` | No | Domain.com.au API client secret |
 
-Notes:
+The app works without external APIs by using the bundled CSV dataset.
 
-- `JWT_SECRET` is required for website authentication.
-- `GEMINI_API_KEY` is optional and enables AI suggestions.
-- `CLIENT_ID` and `CLIENT_SECRET` are optional for Domain API access in the Python flow.
-- The website works without external APIs by using the bundled CSV dataset.
+## How Scoring Works
 
-## Authentication Storage
+Each property is scored on three dimensions:
 
-The Next.js app now stores auth data in two places:
+- **Rental yield** — based on `(rent_estimate * 52) / price`
+- **Capital growth** — based on land size and suburb category
+- **Risk** — based on flood, bushfire, and industrial-zone heuristics
 
-- Server-side account records are saved to `website/data/users.json`.
-- The signed-in user profile is mirrored in browser `localStorage` for a smoother local experience.
+The final score is a weighted combination. Results can be biased toward living or investment depending on the user's selected purpose.
 
-Passwords are not stored in the browser. The server stores hashed passwords only.
+## Authentication
 
-If you want to reset local website accounts during development, stop the app and delete `website/data/users.json`.
+- Server: hashed passwords stored in `website/data/users.json`
+- Client: signed-in user profile mirrored in `localStorage` for UX
+- Passwords are never stored in the browser
 
-## How Property Ranking Works
+To reset accounts during development, delete `website/data/users.json`.
 
-Each property is scored using the mock dataset:
+## Deployment
 
-- Rental yield score: based on `(rent_estimate * 52) / price`
-- Capital growth score: based on land size and suburb category
-- Risk score: based on flood, bushfire, and industrial-zone heuristics
-- Final score: weighted combination of growth, yield, and risk
+Builds cleanly as a Next.js 14 app for Vercel or any Node-compatible platform.
 
-The website can also bias the ranking depending on whether the user is buying to live in the property or invest.
-
-## Deployment Notes
-
-The website builds cleanly as a Next.js 14 app and can be deployed to Vercel or another Node-compatible platform.
-
-For local or demo deployment, the JSON auth store is fine. For real production usage, replace `website/data/users.json` with a proper database-backed auth system such as:
-
-- Supabase
-- Vercel Postgres
-- Neon
-- PlanetScale
-
-The main migration point is [website/src/lib/auth.ts](website/src/lib/auth.ts), where file-based reads and writes can be replaced with database queries.
-
-## Tech Stack
-
-- Next.js 14
-- React 18
-- TypeScript
-- Tailwind CSS
-- jose for JWT handling
-- bcryptjs for password hashing
-- Google Gemini API
-- pandas and Streamlit for the Python tools
+For production, replace the JSON auth store with a database. The migration point is [auth.ts](website/src/lib/auth.ts), where file reads/writes can be swapped for database queries.
