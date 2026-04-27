@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     const purpose = (searchParams.get("purpose") || "any") as "invest" | "live" | "any";
     const topN = Number(searchParams.get("topN") || 5);
 
-    const allProperties = loadProperties();
+    const allProperties = await loadProperties(suburbs);
     const filtered = filterProperties(allProperties, {
       budgetMin,
       budgetMax,

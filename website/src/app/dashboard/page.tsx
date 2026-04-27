@@ -75,7 +75,7 @@ export default function DashboardPage() {
         propertyType,
         minBedrooms: minBedrooms.toString(),
         purpose,
-        topN: "5",
+        topN: "10",
       });
 
       if (selectedSuburbs.length > 0) {
@@ -381,7 +381,7 @@ export default function DashboardPage() {
             {/* Searching skeleton */}
             {searching && (
               <div className="space-y-4">
-                {[1, 2, 3].map((i) => (
+                {[1, 2, 3, 4, 5].map((i) => (
                   <div
                     key={i}
                     className="h-48 bg-white rounded-2xl border border-stone-200/70 animate-pulse"

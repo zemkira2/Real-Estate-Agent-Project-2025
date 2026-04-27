@@ -7,7 +7,54 @@ export interface Property {
   suburb: string;
   land_size: number;
   bedrooms: number;
+  bathrooms: number;
+  parking: number;
+  nearby_schools: number;
   image: string;
+  // Detail-only fields (populated when fetching by listing ID)
+  description?: string;
+  agent_name?: string;
+  agent_phone?: string;
+  agency_name?: string;
+  agency_phone?: string;
+  realestate_url?: string;
+}
+
+interface SuburbAmenities {
+  schools: number;
+  hospital: boolean;
+}
+
+const SUBURB_AMENITIES: Record<string, SuburbAmenities> = {
+  Richmond:      { schools: 5,  hospital: true  },
+  Fitzroy:       { schools: 4,  hospital: true  },
+  "St Kilda":    { schools: 3,  hospital: false },
+  Carlton:       { schools: 6,  hospital: true  },
+  Brunswick:     { schools: 7,  hospital: false },
+  Frankston:     { schools: 8,  hospital: true  },
+  Werribee:      { schools: 6,  hospital: true  },
+  Dandenong:     { schools: 9,  hospital: true  },
+  Sunshine:      { schools: 7,  hospital: true  },
+  "Box Hill":    { schools: 8,  hospital: true  },
+  Essendon:      { schools: 9,  hospital: false },
+  Preston:       { schools: 7,  hospital: false },
+  Reservoir:     { schools: 8,  hospital: false },
+  "South Yarra": { schools: 4,  hospital: false },
+  Toorak:        { schools: 5,  hospital: false },
+  Hawthorn:      { schools: 6,  hospital: false },
+  Footscray:     { schools: 6,  hospital: true  },
+  Geelong:       { schools: 15, hospital: true  },
+  Ballarat:      { schools: 12, hospital: true  },
+  Bendigo:       { schools: 12, hospital: true  },
+  Shepparton:    { schools: 10, hospital: true  },
+  Mildura:       { schools: 8,  hospital: true  },
+  Warrnambool:   { schools: 7,  hospital: true  },
+  Traralgon:     { schools: 8,  hospital: true  },
+  Echuca:        { schools: 5,  hospital: true  },
+};
+
+export function getSuburbAmenities(suburb: string): SuburbAmenities {
+  return SUBURB_AMENITIES[suburb] ?? { schools: 3, hospital: false };
 }
 
 export interface ScoredProperty extends Property {

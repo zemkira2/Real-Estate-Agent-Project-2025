@@ -14,7 +14,7 @@ export async function GET(
       );
     }
 
-    const property = getPropertyById(id);
+    const property = await getPropertyById(id);
     if (!property) {
       return NextResponse.json(
         { error: "Property not found." },
