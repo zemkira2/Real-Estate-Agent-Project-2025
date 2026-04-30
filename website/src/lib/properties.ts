@@ -3,10 +3,23 @@ import { getSuburbInfo } from "./suburbs";
 
 const RAPIDAPI_HOST = "realty-base-au.p.rapidapi.com";
 
-// Default suburbs shown on first load (Melbourne inner suburbs)
+// Default suburbs searched when the user hasn't selected any — broad Melbourne coverage
 const DEFAULT_SUBURBS = [
-  "Richmond, VIC", "Fitzroy, VIC", "Carlton, VIC", "St Kilda, VIC",
-  "South Yarra, VIC", "Brunswick, VIC", "Hawthorn, VIC", "Box Hill, VIC",
+  // Inner city & surrounds
+  "Melbourne, VIC", "Carlton, VIC", "Fitzroy, VIC", "Collingwood, VIC",
+  "Richmond, VIC", "South Yarra, VIC", "St Kilda, VIC", "Prahran, VIC",
+  // Inner north
+  "Brunswick, VIC", "Coburg, VIC", "Preston, VIC", "Reservoir, VIC",
+  // Inner east
+  "Hawthorn, VIC", "Kew, VIC", "Camberwell, VIC", "Box Hill, VIC",
+  // Inner west
+  "Footscray, VIC", "Essendon, VIC", "Sunshine, VIC",
+  // South east
+  "Dandenong, VIC", "Frankston, VIC", "Springvale, VIC",
+  // West
+  "Werribee, VIC", "Point Cook, VIC",
+  // Regional
+  "Geelong, VIC", "Ballarat, VIC", "Bendigo, VIC",
 ];
 
 // In-memory cache keyed by suburb name

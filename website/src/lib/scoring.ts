@@ -172,9 +172,13 @@ export function filterProperties(
   }
 
   if (options.suburbs.length > 0) {
-    // options.suburbs are "Suburb, STATE" keys; p.suburb is the bare suburb name
-    const suburbNames = new Set(options.suburbs.map((s) => s.split(", ")[0]));
-    filtered = filtered.filter((p) => suburbNames.has(p.suburb));
+    // options.suburbs are "Suburb, STATE" keys; p.suburb is the bare suburb name from the API
+    const suburbNames = new Set(
+      options.suburbs.map((s) => s.split(", ")[0].trim().toLowerCase())
+    );
+    filtered = filtered.filter((p) =>
+      suburbNames.has(p.suburb.trim().toLowerCase())
+    );
   }
 
   return filtered;
