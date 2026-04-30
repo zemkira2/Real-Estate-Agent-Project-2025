@@ -1,40 +1,12 @@
 import { Property, ScoredProperty, addScores, getPropertyImage, getSuburbAmenities } from "./scoring";
+import { getSuburbInfo } from "./suburbs";
 
 const RAPIDAPI_HOST = "realty-base-au.p.rapidapi.com";
 
-// VIC suburb → postcode mapping (matches suburbs in scoring.ts)
-const SUBURB_POSTCODES: Record<string, string> = {
-  Richmond: "3121",
-  Fitzroy: "3065",
-  "St Kilda": "3182",
-  Carlton: "3053",
-  Brunswick: "3056",
-  Frankston: "3199",
-  Werribee: "3030",
-  Dandenong: "3175",
-  Sunshine: "3020",
-  "Box Hill": "3128",
-  Essendon: "3040",
-  Preston: "3072",
-  Reservoir: "3073",
-  "South Yarra": "3141",
-  Toorak: "3142",
-  Hawthorn: "3122",
-  Footscray: "3011",
-  Geelong: "3220",
-  Ballarat: "3350",
-  Bendigo: "3550",
-  Shepparton: "3630",
-  Mildura: "3500",
-  Warrnambool: "3280",
-  Traralgon: "3844",
-  Echuca: "3564",
-};
-
-// Suburbs fetched when user doesn't specify a filter
+// Default suburbs shown on first load (Melbourne inner suburbs)
 const DEFAULT_SUBURBS = [
-  "Richmond", "Fitzroy", "Carlton", "St Kilda",
-  "South Yarra", "Brunswick", "Hawthorn", "Box Hill",
+  "Richmond, VIC", "Fitzroy, VIC", "Carlton, VIC", "St Kilda, VIC",
+  "South Yarra, VIC", "Brunswick, VIC", "Hawthorn, VIC", "Box Hill, VIC",
 ];
 
 // In-memory cache keyed by suburb name
@@ -71,7 +43,7 @@ function getLandSize(raw: any, rawType: string): number {
 // The reastatic CDN (i3.au.reastatic.net) requires authenticated session cookies
 // from realestate.com.au and cannot be accessed server-side. Fall back to
 // deterministic Unsplash stock photos keyed by property id and type.
-function buildImageUrl(raw: any, id: number, displayType: string): string {
+function buildImageUrl(_raw: any, id: number, displayType: string): string {
   return getPropertyImage(id, displayType);
 }
 
@@ -115,11 +87,11 @@ function mapApiListing(raw: any, idx: number, schoolCount: number): Property | n
   };
 }
 
-async function fetchSuburb(suburb: string): Promise<ScoredProperty[]> {
-  const postcode = SUBURB_POSTCODES[suburb];
-  if (!postcode) return [];
+async function fetchSuburb(suburbKey: string): Promise<ScoredProperty[]> {
+  const info = getSuburbInfo(suburbKey);
+  if (!info) return [];
 
-  const cached = suburbCache.get(suburb);
+  const cached = suburbCache.get(suburbKey);
   if (cached && Date.now() - cached.ts < CACHE_TTL) return cached.props;
 
   const key = process.env.RAPIDAPI_KEY;
@@ -128,7 +100,7 @@ async function fetchSuburb(suburb: string): Promise<ScoredProperty[]> {
     return [];
   }
 
-  const locationId = `suburb:${suburb}, VIC ${postcode}`;
+  const locationId = `suburb:${info.suburb}, ${info.state} ${info.postcode}`;
   const url =
     `https://${RAPIDAPI_HOST}/properties/search` +
     `?locationId=${encodeURIComponent(locationId)}&pageSize=25`;
@@ -147,7 +119,7 @@ async function fetchSuburb(suburb: string): Promise<ScoredProperty[]> {
     if (!json.status || !Array.isArray(json.data)) return [];
 
     // Fetch real nearby school count using first property's coordinates
-    let schoolCount = getSuburbAmenities(suburb).schools; // hardcoded fallback
+    let schoolCount = getSuburbAmenities(info.suburb).schools; // hardcoded fallback
     const firstWithCoords = json.data.find(
       (r: any) => r.address?.location?.latitude && r.address?.location?.longitude
     );
@@ -174,11 +146,11 @@ async function fetchSuburb(suburb: string): Promise<ScoredProperty[]> {
       .filter(Boolean) as Property[];
 
     const scored = addScores(props);
-    suburbCache.set(suburb, { props: scored, ts: Date.now() });
+    suburbCache.set(suburbKey, { props: scored, ts: Date.now() });
     scored.forEach((p) => propertyMap.set(p.id, p));
     return scored;
   } catch (err) {
-    console.error(`Failed to fetch suburb ${suburb}:`, err);
+    console.error(`Failed to fetch suburb ${suburbKey}:`, err);
     return [];
   }
 }
@@ -188,7 +160,7 @@ export async function loadProperties(
 ): Promise<ScoredProperty[]> {
   let targets =
     suburbs && suburbs.length > 0
-      ? suburbs.filter((s) => SUBURB_POSTCODES[s])
+      ? suburbs.filter((s) => getSuburbInfo(s))
       : DEFAULT_SUBURBS;
 
   if (targets.length === 0) targets = DEFAULT_SUBURBS;

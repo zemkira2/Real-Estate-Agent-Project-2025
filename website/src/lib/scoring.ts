@@ -1,3 +1,5 @@
+import { getAllSuburbKeys } from "./suburbs";
+
 export interface Property {
   id: number;
   price: number;
@@ -170,7 +172,9 @@ export function filterProperties(
   }
 
   if (options.suburbs.length > 0) {
-    filtered = filtered.filter((p) => options.suburbs.includes(p.suburb));
+    // options.suburbs are "Suburb, STATE" keys; p.suburb is the bare suburb name
+    const suburbNames = new Set(options.suburbs.map((s) => s.split(", ")[0]));
+    filtered = filtered.filter((p) => suburbNames.has(p.suburb));
   }
 
   return filtered;
@@ -203,5 +207,5 @@ export function rankProperties(
 }
 
 export function getAllSuburbs(): string[] {
-  return [...CITY_SUBURBS, ...REGIONAL_SUBURBS].sort();
+  return getAllSuburbKeys();
 }

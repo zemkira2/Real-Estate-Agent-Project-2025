@@ -10,11 +10,12 @@ export async function GET(request: NextRequest) {
     const budgetMax = Number(searchParams.get("budgetMax") || 2000000);
     const propertyType = searchParams.get("propertyType") || "Any";
     const suburbs = searchParams.get("suburbs")
-      ? searchParams.get("suburbs")!.split(",")
+      ? searchParams.get("suburbs")!.split("|")
       : [];
     const minBedrooms = Number(searchParams.get("minBedrooms") || 0);
     const purpose = (searchParams.get("purpose") || "any") as "invest" | "live" | "any";
-    const topN = Number(searchParams.get("topN") || 5);
+    const page = Math.max(1, Number(searchParams.get("page") || 1));
+    const pageSize = Math.min(100, Math.max(1, Number(searchParams.get("pageSize") || 20)));
 
     const allProperties = await loadProperties(suburbs);
     const filtered = filterProperties(allProperties, {
@@ -29,16 +30,24 @@ export async function GET(request: NextRequest) {
     if (filtered.length === 0) {
       return NextResponse.json({
         properties: [],
+        totalMatches: 0,
+        totalPages: 0,
+        currentPage: 1,
         allSuburbs: getAllSuburbs(),
         message: "No properties match your criteria. Try widening your search.",
       });
     }
 
-    const ranked = rankProperties(filtered, topN, purpose);
+    const ranked = rankProperties(filtered, filtered.length, purpose);
+    const totalPages = Math.ceil(ranked.length / pageSize);
+    const start = (page - 1) * pageSize;
+    const pageResults = ranked.slice(start, start + pageSize);
 
     return NextResponse.json({
-      properties: ranked,
+      properties: pageResults,
       totalMatches: filtered.length,
+      totalPages,
+      currentPage: page,
       allSuburbs: getAllSuburbs(),
     });
   } catch {
