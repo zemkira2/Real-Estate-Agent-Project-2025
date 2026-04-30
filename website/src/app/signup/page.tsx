@@ -46,7 +46,7 @@ export default function SignupPage() {
       }
 
       window.localStorage.setItem(LOCAL_AUTH_USER_KEY, JSON.stringify(data.user));
-      router.push("/dashboard");
+      router.push("/dashboard?onboarding=true");
     } catch {
       setError("Unable to connect. Please check your internet connection.");
     } finally {

@@ -11,10 +11,20 @@ const JWT_SECRET = new TextEncoder().encode(
 const COOKIE_NAME = "auth-token";
 const USER_STORE_PATH = path.join(process.cwd(), "data", "users.json");
 
+export interface UserPreferences {
+  purpose: "live" | "invest" | "any";
+  budgetMin: number;
+  budgetMax: number;
+  propertyType: string;
+  minBedrooms: number;
+  suburbs: string[];
+}
+
 export interface User {
   id: string;
   email: string;
   name: string;
+  preferences?: UserPreferences;
 }
 
 interface StoredUser extends User {
@@ -31,7 +41,6 @@ function sanitiseName(name: string): string {
 
 async function ensureUserStore(): Promise<void> {
   await fs.mkdir(path.dirname(USER_STORE_PATH), { recursive: true });
-
   try {
     await fs.access(USER_STORE_PATH);
   } catch {
@@ -41,27 +50,21 @@ async function ensureUserStore(): Promise<void> {
 
 function isStoredUser(value: unknown): value is StoredUser {
   if (!value || typeof value !== "object") return false;
-
-  const candidate = value as Partial<StoredUser>;
+  const c = value as Partial<StoredUser>;
   return (
-    typeof candidate.id === "string" &&
-    typeof candidate.email === "string" &&
-    typeof candidate.name === "string" &&
-    typeof candidate.passwordHash === "string"
+    typeof c.id === "string" &&
+    typeof c.email === "string" &&
+    typeof c.name === "string" &&
+    typeof c.passwordHash === "string"
   );
 }
 
 async function readStoredUsers(): Promise<StoredUser[]> {
   await ensureUserStore();
-
   try {
     const raw = await fs.readFile(USER_STORE_PATH, "utf-8");
     const parsed: unknown = JSON.parse(raw);
-
-    if (!Array.isArray(parsed)) {
-      return [];
-    }
-
+    if (!Array.isArray(parsed)) return [];
     return parsed.filter(isStoredUser);
   } catch {
     return [];
@@ -82,22 +85,16 @@ export async function createUser(
   const cleanedName = sanitiseName(name);
   const users = await readStoredUsers();
 
-  if (users.some((user) => user.email === normalisedEmail)) {
+  if (users.some((u) => u.email === normalisedEmail)) {
     throw new Error("An account with this email already exists");
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
   const id = crypto.randomUUID();
-  const user: StoredUser = {
-    id,
-    email: normalisedEmail,
-    name: cleanedName,
-    passwordHash,
-  };
+  const user: StoredUser = { id, email: normalisedEmail, name: cleanedName, passwordHash };
 
   users.push(user);
   await writeStoredUsers(users);
-
   return { id, email: user.email, name: user.name };
 }
 
@@ -107,18 +104,25 @@ export async function verifyCredentials(
 ): Promise<User> {
   const normalisedEmail = normaliseEmail(email);
   const users = await readStoredUsers();
-  const user = users.find((storedUser) => storedUser.email === normalisedEmail);
+  const stored = users.find((u) => u.email === normalisedEmail);
 
-  if (!user) {
-    throw new Error("Invalid email or password");
-  }
+  if (!stored) throw new Error("Invalid email or password");
 
-  const valid = await bcrypt.compare(password, user.passwordHash);
-  if (!valid) {
-    throw new Error("Invalid email or password");
-  }
+  const valid = await bcrypt.compare(password, stored.passwordHash);
+  if (!valid) throw new Error("Invalid email or password");
 
-  return { id: user.id, email: user.email, name: user.name };
+  return { id: stored.id, email: stored.email, name: stored.name, preferences: stored.preferences };
+}
+
+export async function saveUserPreferences(
+  userId: string,
+  preferences: UserPreferences
+): Promise<void> {
+  const users = await readStoredUsers();
+  const idx = users.findIndex((u) => u.id === userId);
+  if (idx === -1) throw new Error("User not found");
+  users[idx] = { ...users[idx], preferences };
+  await writeStoredUsers(users);
 }
 
 export async function createToken(user: User): Promise<string> {
@@ -129,14 +133,10 @@ export async function createToken(user: User): Promise<string> {
     .sign(JWT_SECRET);
 }
 
-export async function verifyToken(token: string): Promise<User | null> {
+export async function verifyToken(token: string): Promise<{ id: string } | null> {
   try {
     const { payload } = await jwtVerify(token, JWT_SECRET);
-    return {
-      id: payload.sub as string,
-      email: payload.email as string,
-      name: payload.name as string,
-    };
+    return { id: payload.sub as string };
   } catch {
     return null;
   }
@@ -146,7 +146,16 @@ export async function getCurrentUser(): Promise<User | null> {
   const cookieStore = await cookies();
   const token = cookieStore.get(COOKIE_NAME)?.value;
   if (!token) return null;
-  return verifyToken(token);
+
+  const payload = await verifyToken(token);
+  if (!payload) return null;
+
+  // Look up full user (including preferences) from storage
+  const users = await readStoredUsers();
+  const stored = users.find((u) => u.id === payload.id);
+  if (!stored) return null;
+
+  return { id: stored.id, email: stored.email, name: stored.name, preferences: stored.preferences };
 }
 
 export function getTokenCookieOptions(token: string) {
@@ -156,7 +165,7 @@ export function getTokenCookieOptions(token: string) {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax" as const,
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    maxAge: 60 * 60 * 24 * 7,
     path: "/",
   };
 }
