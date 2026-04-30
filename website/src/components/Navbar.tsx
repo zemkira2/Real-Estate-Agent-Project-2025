@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-const LOCAL_AUTH_USER_KEY = "rea-auth-user";
+import Logo from "@/components/Logo";
+import { LOCAL_AUTH_USER_KEY } from "@/lib/constants";
 
 interface NavbarProps {
   userName: string;
@@ -21,25 +21,8 @@ export default function Navbar({ userName }: NavbarProps) {
   return (
     <header className="bg-primary-900 border-b border-white/8 px-6">
       <div className="max-w-7xl mx-auto h-14 flex items-center justify-between">
-        <Link href="/dashboard" className="flex items-center gap-2.5">
-          <div className="w-7 h-7 bg-gold-400 rounded-lg flex items-center justify-center">
-            <svg
-              className="w-4 h-4 text-primary-950"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"
-              />
-            </svg>
-          </div>
-          <span className="font-display text-base font-medium text-white tracking-tight">
-            Estate
-          </span>
+        <Link href="/dashboard">
+          <Logo size="sm" variant="light" />
         </Link>
 
         <div className="flex items-center gap-4">

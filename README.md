@@ -1,141 +1,115 @@
 # Real Estate Agent Project
 
-AI-powered property recommendation system for Australian real estate. This repo includes:
-
-- a Python CLI workflow for scoring and filtering mock VIC listings
-- a legacy Streamlit UI
-- a Next.js web app with authentication, property images, ranked results, detail pages, and AI-generated suggestions
+AI-powered property recommendation system for Australian (VIC) real estate, built with Next.js 14.
 
 ## Project Structure
 
 ```text
-.
-|-- Project.py                # Python CLI: scoring, filtering, Gemini reasoning
-|-- front_end.py              # Streamlit UI
-|-- processing_Data.py        # CSV data generator
-|-- config.py                 # Scoring rules and LLM prompt
-|-- vic_properties_1000.csv   # Mock property dataset for Python tools
-|-- requirements.txt          # Python dependencies
-`-- website/
-    |-- public/data/          # CSV data used by the Next.js app
-    |-- src/
-    |   |-- app/              # App Router pages and API routes
-    |   |-- components/       # Reusable UI components
-    |   `-- lib/              # Auth, scoring, and property loading
-    |-- data/users.json       # Local auth store, created automatically
-    `-- package.json          # Website dependencies and scripts
+website/
+├── public/data/              # Fallback CSV property dataset
+├── data/users.json           # Local auth store (auto-created)
+├── src/
+│   ├── app/
+│   │   ├── page.tsx          # Landing page
+│   │   ├── login/            # Login page
+│   │   ├── signup/           # Signup page
+│   │   ├── dashboard/
+│   │   │   ├── page.tsx      # Search, paginated results & AI report
+│   │   │   └── property/[id] # Property detail page
+│   │   └── api/
+│   │       ├── auth/         # login, signup, logout, me
+│   │       ├── properties/   # Paginated search & single property
+│   │       └── ai-suggestion # Gemini 2.5 Flash deep analysis
+│   ├── components/
+│   │   ├── Logo.tsx
+│   │   ├── Navbar.tsx
+│   │   └── PropertyCard.tsx
+│   ├── lib/
+│   │   ├── auth.ts           # JWT auth & user storage
+│   │   ├── constants.ts      # Shared constants
+│   │   ├── markdown.ts       # Markdown renderer (headers, lists, hr, code)
+│   │   ├── properties.ts     # Live data via RapidAPI (Realty Base AU)
+│   │   ├── scoring.ts        # Property scoring & ranking algorithm
+│   │   └── suburbs.ts        # VIC suburb list for autocomplete
+│   └── middleware.ts         # Route protection
+├── .env.local.example        # Environment variable template
+├── tailwind.config.ts        # Custom theme (primary/gold palette)
+└── package.json
 ```
 
-## Current Features
+## Features
 
-- Email/password authentication with JWT sessions
-- Local account persistence in `website/data/users.json`
-- Safe browser-side profile persistence in `localStorage`
-- Search filters for budget, suburb, property type, bedrooms, and buyer purpose
-- Ranked recommendation cards with property images and visible pricing
-- Click-through property detail pages with hero image, price summary, score breakdown, and AI analysis
-- CSV-backed mock property dataset for local development
-- Gemini-powered property suggestions when `GEMINI_API_KEY` is configured
+- Email/password authentication with JWT sessions (HTTP-only cookies)
+- Search filters: budget range, suburbs (autocomplete), property type, bedrooms, buyer purpose
+- Paginated results with configurable page size (10 / 20 / 50 per page)
+- Ranked property cards with yield, growth, and risk score breakdown
+- Property detail pages with images and full listing info
+- AI Property Report powered by Gemini 2.5 Flash — analyses top 20 results and produces:
+  - Top 3 picks for living (lifestyle fit, safety, schools, pros/cons)
+  - Top 3 picks for investment (gross yield %, annual income, growth outlook, risks)
+  - Suburb-level market insights
+  - Personalised recommendation based on user's stated purpose
 
-## Requirements
+## Tech Stack
 
-### Python tools
-
-- Python 3.9 or newer
-- `pip install -r requirements.txt`
-
-### Website
-
-- Node.js 18 or newer
-- npm 9 or newer
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 14 App Router, React 18 |
+| Language | TypeScript |
+| Styling | Tailwind CSS (custom navy/gold theme) |
+| Auth | `jose` (JWT), `bcryptjs` (password hashing) |
+| Property data | RapidAPI — Realty Base AU |
+| AI | Google Gemini 2.5 Flash (`@google/generative-ai`) |
 
 ## Quick Start
 
-### Run the Next.js website
-
-```powershell
+```bash
 cd website
 npm install
-Copy-Item .env.local.example .env.local
+cp .env.local.example .env.local   # then fill in your keys
 npm run dev
 ```
 
 Open `http://localhost:3000`.
 
-### Run the Python CLI
-
-```powershell
-pip install -r requirements.txt
-python Project.py
-```
-
-### Run the Streamlit UI
-
-```powershell
-pip install -r requirements.txt
-python -m streamlit run front_end.py
-```
-
 ## Environment Variables
 
-Create `website/.env.local`:
+| Variable | Required | Description |
+|---|---|---|
+| `JWT_SECRET` | Yes | Random secret for signing JWT tokens |
+| `RAPIDAPI_KEY` | Yes | RapidAPI key for live property data (Realty Base AU) |
+| `GEMINI_API_KEY` | No | Enables the AI Property Report (free at aistudio.google.com) |
 
-```bash
-JWT_SECRET=your-random-secret-key
-GEMINI_API_KEY=your_gemini_api_key
-CLIENT_ID=your_domain_client_id
-CLIENT_SECRET=your_domain_client_secret
-```
+The app loads live listings from the RapidAPI endpoint. Without `RAPIDAPI_KEY` the properties list will be empty.
 
-Notes:
+## How Scoring Works
 
-- `JWT_SECRET` is required for website authentication.
-- `GEMINI_API_KEY` is optional and enables AI suggestions.
-- `CLIENT_ID` and `CLIENT_SECRET` are optional for Domain API access in the Python flow.
-- The website works without external APIs by using the bundled CSV dataset.
+Each property is scored on three dimensions and ranked server-side:
 
-## Authentication Storage
+| Dimension | Calculation |
+|---|---|
+| Rental yield | `(rent_estimate × 52) ÷ price` |
+| Capital growth | Land size + suburb category (city / regional) |
+| Risk | Flood-prone, bushfire, and industrial-zone heuristics |
 
-The Next.js app now stores auth data in two places:
+The final score is a weighted combination. When the user selects **Invest** purpose, yield and growth are weighted higher; **Live** purpose weights low risk and bedroom count higher.
 
-- Server-side account records are saved to `website/data/users.json`.
-- The signed-in user profile is mirrored in browser `localStorage` for a smoother local experience.
+## Pagination
 
-Passwords are not stored in the browser. The server stores hashed passwords only.
+The `/api/properties` endpoint accepts `page` and `pageSize` query params and returns `totalPages` and `currentPage`. The dashboard UI exposes a per-page selector and numbered page controls.
 
-If you want to reset local website accounts during development, stop the app and delete `website/data/users.json`.
+## AI Report
 
-## How Property Ranking Works
+Clicking **AI Analysis** fetches the top 20 matching properties (independent of the current page) and sends them to Gemini 2.5 Flash with the user's full profile. The model returns a structured markdown report with per-property deep dives and a tailored recommendation. The free tier of Gemini is sufficient for normal usage.
 
-Each property is scored using the mock dataset:
+## Authentication
 
-- Rental yield score: based on `(rent_estimate * 52) / price`
-- Capital growth score: based on land size and suburb category
-- Risk score: based on flood, bushfire, and industrial-zone heuristics
-- Final score: weighted combination of growth, yield, and risk
+- Passwords are bcrypt-hashed and stored in `website/data/users.json`
+- Sessions use signed JWT tokens in HTTP-only cookies
+- Client mirrors basic user info in `localStorage` for UI use only
 
-The website can also bias the ranking depending on whether the user is buying to live in the property or invest.
+To reset accounts during development, delete `website/data/users.json`.
 
-## Deployment Notes
+## Deployment
 
-The website builds cleanly as a Next.js 14 app and can be deployed to Vercel or another Node-compatible platform.
-
-For local or demo deployment, the JSON auth store is fine. For real production usage, replace `website/data/users.json` with a proper database-backed auth system such as:
-
-- Supabase
-- Vercel Postgres
-- Neon
-- PlanetScale
-
-The main migration point is [website/src/lib/auth.ts](website/src/lib/auth.ts), where file-based reads and writes can be replaced with database queries.
-
-## Tech Stack
-
-- Next.js 14
-- React 18
-- TypeScript
-- Tailwind CSS
-- jose for JWT handling
-- bcryptjs for password hashing
-- Google Gemini API
-- pandas and Streamlit for the Python tools
+Builds as a standard Next.js 14 app for Vercel or any Node-compatible platform. For production, replace the JSON auth store with a database — the migration point is [`auth.ts`](website/src/lib/auth.ts).
