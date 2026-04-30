@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Real Estate Agent — an AI-powered property recommendation app for Australian (VIC) real estate. Next.js 14 web app with JWT auth, paginated property search/scoring, and Gemini 2.5 Flash AI analysis.
+Real Estate Agent — an AI-powered property recommendation app for Australian (VIC) real estate. Next.js 14 web app with JWT auth, user preferences, paginated property search/scoring, and Gemini 2.5 Flash AI analysis. Dashboard is split into two purpose-specific pages: `/dashboard/live` and `/dashboard/invest`.
 
 ## Commands
 
@@ -19,7 +19,7 @@ npx tsc --noEmit  # Type-check without emitting
 - **Framework**: Next.js 14 App Router, React 18, TypeScript, Tailwind CSS
 - **Auth**: JWT via `jose`, passwords hashed with `bcryptjs`, HTTP-only cookies
 - **Data**: Live property listings via RapidAPI (Realty Base AU); `loadProperties()` is async
-- **Users**: JSON file store at `website/data/users.json` (auto-created)
+- **Users**: JSON file store at `website/data/users.json` (auto-created); stores hashed password + `UserPreferences`
 - **AI**: Google Gemini 2.5 Flash via `@google/generative-ai`; model `gemini-2.5-flash`, `maxOutputTokens: 8192`
 - **Middleware**: `src/middleware.ts` protects `/dashboard/*` routes, redirects auth pages if logged in
 - **Path alias**: `@/*` maps to `./src/*`
@@ -28,20 +28,27 @@ npx tsc --noEmit  # Type-check without emitting
 
 ```
 website/src/
-  app/                      # Pages and API routes (App Router)
-    api/auth/               # login, signup, logout, me endpoints
-    api/properties/         # Paginated search endpoint (page, pageSize params)
-    api/ai-suggestion/      # Gemini deep analysis endpoint
-    dashboard/              # Main search + paginated results + AI report
-    dashboard/property/[id]/ # Property detail page
-  components/               # Logo, Navbar, PropertyCard
+  app/                        # Pages and API routes (App Router)
+    api/auth/                 # login, signup, logout, me, preferences endpoints
+    api/properties/           # Paginated search endpoint (page, pageSize params)
+    api/ai-suggestion/        # Gemini deep analysis endpoint
+    dashboard/                # Hub page — choose Live or Invest
+    dashboard/live/           # Self-living search page (purpose=live locked)
+    dashboard/invest/         # Investment search page (purpose=invest locked)
+    dashboard/property/[id]/  # Property detail page
+  components/
+    DashboardContent.tsx      # Shared search + results + AI component (accepts mode prop)
+    OnboardingModal.tsx       # 4-step preferences wizard modal
+    Navbar.tsx                # Nav with Live/Invest tabs + Preferences button
+    Logo.tsx
+    PropertyCard.tsx
   lib/
-    auth.ts                 # JWT helpers & JSON user store
-    constants.ts            # Shared constants
-    markdown.ts             # Line-by-line markdown renderer (h1-h3, ul, hr, code)
-    properties.ts           # loadProperties() — async, fetches from RapidAPI
-    scoring.ts              # filterProperties(), rankProperties(), addScores()
-    suburbs.ts              # getAllSuburbKeys() — VIC suburb list for autocomplete
+    auth.ts                   # JWT helpers, JSON user store, UserPreferences type, saveUserPreferences()
+    constants.ts              # Shared constants
+    markdown.ts               # Line-by-line markdown renderer (h1-h3, ul, hr, code)
+    properties.ts             # loadProperties() — async, fetches from RapidAPI
+    scoring.ts                # filterProperties(), rankProperties(), addScores()
+    suburbs.ts                # getAllSuburbKeys() — VIC suburb list for autocomplete
 ```
 
 ## Environment Variables
@@ -50,6 +57,34 @@ Required: `JWT_SECRET`, `RAPIDAPI_KEY`
 Optional: `GEMINI_API_KEY` (free at aistudio.google.com — enables AI report)
 
 Copy `website/.env.local.example` to `website/.env.local`. Never commit `.env.local`.
+
+## User Preferences
+
+`UserPreferences` (defined in `lib/auth.ts`) is stored on the user record in `users.json`:
+
+```ts
+interface UserPreferences {
+  purpose: "live" | "invest" | "any";
+  budgetMin: number;
+  budgetMax: number;
+  propertyType: string;
+  minBedrooms: number;
+  suburbs: string[];
+}
+```
+
+- Saved via `POST /api/auth/preferences`
+- Returned by `GET /api/auth/me` (full user lookup from storage, not JWT-only)
+- `getCurrentUser()` in `auth.ts` reads the full user record (including preferences) from `users.json` using the ID from the JWT
+- `OnboardingModal.tsx` is shown after signup (`/dashboard?onboarding=true`) and when preferences are unset
+- Preferences pre-populate the search form in `DashboardContent.tsx`
+
+## Dashboard Structure
+
+- `/dashboard` — hub page: two cards (Find a Home / Investment Properties) + preferences summary + Edit button
+- `/dashboard/live` — `<DashboardContent mode="live" />` — purpose locked to live, search pre-loaded from preferences
+- `/dashboard/invest` — `<DashboardContent mode="invest" />` — purpose locked to invest, search pre-loaded from preferences
+- `DashboardContent.tsx` is the shared component; `mode` prop locks the purpose and changes headings/labels
 
 ## Pagination
 
@@ -72,7 +107,7 @@ Properties scored on three axes in `lib/scoring.ts`:
 - **Rental yield**: `(rent_estimate × 52) / price` → scaled 0–10
 - **Capital growth**: land size + suburb category (city suburbs score higher)
 - **Risk**: flood-prone (+5), bushfire zone (+3), industrial area (+2)
-- **Final score**: weighted combination; purpose biases weights (invest → yield/growth; live → low risk + bedrooms)
+- **Final score**: weighted combination; `mode="invest"` weights yield/growth higher; `mode="live"` weights low risk + bedrooms
 
 `rankProperties(filtered, filtered.length, purpose)` sorts all matches; the API then slices for the requested page.
 
