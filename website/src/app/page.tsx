@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/components/Logo";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -198,11 +199,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="border-t border-stone-200 py-8 text-center text-stone-400 text-sm">
-        Estate &mdash; AI-Powered Property Recommendations &mdash; Victoria,
-        Australia
-      </footer>
+      <Footer />
     </div>
   );
 }
